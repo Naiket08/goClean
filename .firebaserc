@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "goclean-995b3": {
+      "hosting": {
+        "goClean": [
+          "goclean-995b3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "goclean-995b3"
+  }
+}

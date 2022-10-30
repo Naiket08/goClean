@@ -1,1 +1,45 @@
-<p>home works!</p>
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">
+        <button mat-button [matMenuTriggerFor]="menu" style="background-color: transparent;border: none;">
+            <div style="width: 25px;height: 3px;background-color: #1A1A1A;margin: 5px;"></div>
+            <div style="width: 25px;height: 3px;background-color: #1A1A1A;margin: 5px;"></div>
+            <div style="width: 25px;height: 3px;background-color: #1A1A1A;margin: 5px;"></div>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Devices</button>
+            <hr style="margin: 0;height: 1px;background-color: #1B5043;opacity: 1;">
+            <button mat-menu-item>Cleaning Cycle</button>
+        </mat-menu>
+        <a class="navbar-brand" href="#"
+            style="margin-left: 5px;font-size: 25px;font-weight: 500;color: #1B5043;letter-spacing: 2px;">GoClean</a>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation"
+            (click)="isCollapsed = !isCollapsed">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+
+        <!-- <div class="collapse navbar-collapse" id="navbarColor03" [ngbCollapse]="isCollapsed">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Devices</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div> -->
+    </nav>
+</div>
+<div>
+    <router-outlet></router-outlet>
+</div>

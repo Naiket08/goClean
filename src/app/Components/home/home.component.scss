@@ -1,0 +1,15 @@
+.mat-menu-item{
+    background-color: lightgray;
+}
+
+.mat-menu-item:hover{
+    background-color: #1B5043;
+    color: white;
+}
+
+mat-drawer-content {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }

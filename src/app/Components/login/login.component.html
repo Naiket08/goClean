@@ -16,7 +16,7 @@
     <button type="submit" class="btn btn-primary" (click)="onSubmitHandleRegister()">Submit</button>
   </form> -->
 
-  <!-- <form>
+<!-- <form>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" 
@@ -34,139 +34,154 @@
     <button type="submit" class="btn btn-primary" (click)="onSubmitHandleLogin()">Submit</button>
   </form> -->
 
-  <<section class="h-100 gradient-form" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-xl-10">
-          <div class="card rounded-3 text-black">
-            <div class="row g-0">
-            <div *ngIf= displaySignUp class="col-lg-6 d-flex align-items-center gradient-custom-2"></div>
-              <div class="col-lg-6" *ngIf= !displaySignUp >
-                <div class="card-body p-md-5 mx-md-4">
-  
-                  <div class="text-center">
-                    <img src="assets\img\GoCleanlogo.png"
-                      style="width: 185px;" alt="logo">
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div *ngIf=displaySignUp class="col-lg-6 d-flex align-items-center gradient-custom-2"></div>
+            <div class="col-lg-6" *ngIf=!displaySignUp>
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img src="assets\img\GoCleanlogo.png" style="width: 185px;" alt="logo">
+                </div>
+
+                <form [formGroup]="loginForm">
+                  <h4>Please login to your account</h4>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example11">Username</label>
+                    <input type="email" id="form2Example11" class="form-control" placeholder="Username"
+                    [ngClass]="(loginForm.get('userNameLogin')?.touched||loginForm.get('userNameLogin')?.dirty)&&loginForm.get('userNameLogin')?.errors?'is-invalid':''"
+                      [(ngModel)]="userNameLogin" formControlName="userNameLogin" name="userNameLogin "/>
+                   <div class="invalid-feedback">Username is required</div> 
                   </div>
-  
-                  <form>
-                    <h4>Please login to your account</h4>
-  
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example11">Username</label>
-                      <input type="email" id="form2Example11" class="form-control"
-                        placeholder="Email address" [(ngModel)]="userNameLogin" name = "userNameLogin " />
-                     
-                    </div>
-  
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example22">Password</label>
-                      <input type="password" id="form2Example22" class="form-control"
-                      placeholder="Password"  [(ngModel)]="passwordLogin" name = "passwordLogin"/>
-                      
-                    </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example22">Password</label>
+                    <input type="password" id="form2Example22" class="form-control" placeholder="Password"
+                    [ngClass]="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.errors?'is-invalid':''"
+                      [(ngModel)]="passwordLogin" formControlName="passwordLogin" name="passwordLogin"
+                      [maxlength]="30"/>
+                      <div class="invalid-feedback" *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('required')">Password is required</div>
+                      <div class="invalid-feedback" *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('minlength')">Password length should be atleast 8 characters</div>
+                      <div class="invalid-feedback" *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('pattern')">Password must be in correct format</div>
+                  </div>
 
 
-                    <div class="form-outline mb-4">
-                    <div class="alert alert-danger" *ngIf = userLoginFailed role="alert">
+                  <div class="form-outline mb-4">
+                    <div class="alert alert-danger" *ngIf=userLoginFailed role="alert">
                       Username or Password is Incorrect!
                     </div>
                   </div>
-                    
-                    
-                    <div class=" form-outline text-center pt-1 mb-5 pb-1">
-                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" (click)="onSubmitHandleLogin()">Log
-                        in</button><br>
-                      <a class="text-muted" href="#!">Forgot password?</a>
-                    </div>
-  
-                    <div class="d-flex align-items-center justify-content-center pb-4">
-                      <p class="mb-0 me-2">Don't have an account?</p>
-                      <button type="button" class="btn btn-outline-danger" (click)="changeDisplaySignup()">Create new</button>
-                    </div>
-  
-                  </form>
-  
-                </div>
-              </div>
 
 
-
-<!-- Registration code from here-->
-
-
-
-              
-              <div class="col-lg-6" *ngIf = displaySignUp>
-
-                <div class="card-body p-md-5 mx-md-4">
-  
-                  <div class="text-center">
-                    <img src="assets\img\GoCleanlogo.png"
-                      style="width: 185px;" alt="logo">
+                  <div class=" form-outline text-center pt-1 mb-5 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
+                      (click)="onSubmitHandleLogin()" [disabled]="!loginForm.valid">Log
+                      in</button><br>
+                    <a class="text-muted" href="#!">Forgot password?</a>
                   </div>
-  
-                  <form>
-                    <h4>Please Sign up here</h4>
-  
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example11">Username</label>
-                      <input type="email" id="form2Example11" class="form-control"
-                        placeholder="Email address" [(ngModel)]="userNameRegister" name = "userNameRegister " />
-                     
-                    </div>
-  
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example22">Password</label>
-                      <input type="password" id="form2Example22" class="form-control"
-                      placeholder="Password"  [(ngModel)]="passwordRegister" name = "passwordRegister"/>
-                      
-                    </div>
 
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example22">Re Enter Password</label>
-                      <input type="password" id="form2Example22" class="form-control"
-                      placeholder="Password"/>
-                      
-                    </div>
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <button type="button" class="btn btn-outline-danger" (click)="changeDisplaySignup()">Create
+                      new</button>
+                  </div>
 
-                    <div class="form-outline mb-4">
-                      <div class="alert alert-success" *ngIf = userCreatedSuccess role="alert">
-                          User has been created!
-                        </div>
-                        <div class="alert alert-danger" *ngIf = userCreatedFailed role="alert">
-                          User already exists!
-                        </div></div>
-  
-                    <div class=" form-outline text-center pt-1 mb-5 pb-1">
-                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" (click)="onSubmitHandleRegister()">
-                        Sign Up</button><br>
-                    </div>
-
-                    
-                    <div class="d-flex align-items-center justify-content-center pb-4">
-                      <p class="mb-0 me-2">Already have an account?</p>
-                      <button type="button" class="btn btn-outline-danger" (click)="changeDisplaySignup()">Login</button>
-                    </div>
-                  </form>
-  
-                </div>
-
+                </form>
 
               </div>
-
-              <div *ngIf= !displaySignUp class="col-lg-6 d-flex align-items-center gradient-custom-2"></div>
-
-              
+            </div>
 
 
 
+            <!-- Registration code from here-->
 
+
+
+
+            <div class="col-lg-6" *ngIf=displaySignUp>
+
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img src="assets\img\GoCleanlogo.png" style="width: 185px;" alt="logo">
+                </div>
+
+                <form [formGroup]="registrationForm">
+                  <h4>Please Sign up here</h4>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example11">Username</label>
+                    <input type="email" id="form2Example11" class="form-control" placeholder="Email address"
+                    [ngClass]="(registrationForm.get('userNameRegister')?.touched||registrationForm.get('userNameRegister')?.dirty)&&registrationForm.get('userNameRegister')?.errors?'is-invalid':''"
+                      [(ngModel)]="userNameRegister" formControlName="userNameRegister" name="userNameRegister " />
+                      <div class="invalid-feedback">Username is required</div> 
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example22">Password</label>
+                    <input type="password" id="form2Example22" class="form-control" placeholder="Password"
+                    [ngClass]="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.errors?'is-invalid':''"
+                      [(ngModel)]="passwordRegister" formControlName="passwordRegister" name="passwordRegister" />
+                      <div class="invalid-feedback" *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('required')">Password is required</div>
+                      <div class="invalid-feedback" *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('minlength')">Password length should be atleast 8 characters</div>
+                      <div class="invalid-feedback" *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('pattern')">Password must be in correct format</div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example22">Re Enter Password</label>
+                    <input type="password" id="form2Example22" class="form-control" placeholder="Password" 
+                    [ngClass]="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.errors?'is-invalid':''"
+                    [(ngModel)]="reTypePasswordRegister" formControlName="reTypePasswordRegister" name="reTypePasswordRegister"/>
+                    <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('required')">Password is required</div>
+                      <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('minlength')">Password length should be atleast 8 characters</div>
+                      <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('pattern')">Password must be in correct format</div>
+                      <!-- <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('MustMatch')">Password do not match</div> -->
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="alert alert-success" *ngIf=userCreatedSuccess role="alert">
+                      User has been created!
+                    </div>
+                    <div class="alert alert-danger" *ngIf=userCreatedFailed role="alert">
+                      User already exists!
+                    </div>
+                  </div>
+
+                  <div class=" form-outline text-center pt-1 mb-5 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
+                      (click)="onSubmitHandleRegister()" [disabled]="!registrationForm.valid">
+                      Sign Up</button><br>
+                  </div>
+
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Already have an account?</p>
+                    <button type="button" class="btn btn-outline-danger" (click)="changeDisplaySignup()">Login</button>
+                  </div>
+                </form>
+
+              </div>
 
 
             </div>
+
+            <div *ngIf=!displaySignUp class="col-lg-6 d-flex align-items-center gradient-custom-2"></div>
+
+
+
+
+
+
+
+
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

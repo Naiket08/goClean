@@ -22,6 +22,7 @@ import { DashboardComponent } from './Components/home/dashboard/dashboard.compon
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [
     BrowserModule,
     FormsModule,
+    MatIconModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MatMenuModule,

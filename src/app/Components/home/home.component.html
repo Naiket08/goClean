@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">
         <button mat-button [matMenuTriggerFor]="menu" style="background-color: transparent;border: none;">
             <div style="width: 25px;height: 3px;background-color: #1A1A1A;margin: 5px;"></div>
@@ -12,13 +12,13 @@
         </mat-menu>
         <a class="navbar-brand" href="#"
             style="margin-left: 5px;font-size: 25px;font-weight: 500;color: #1B5043;letter-spacing: 2px;">GoClean</a>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation"
             (click)="isCollapsed = !isCollapsed">
             <span class="navbar-toggler-icon"></span>
-        </button> -->
+        </button>
 
-        <!-- <div class="collapse navbar-collapse" id="navbarColor03" [ngbCollapse]="isCollapsed">
+        <div class="collapse navbar-collapse" id="navbarColor03" [ngbCollapse]="isCollapsed">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Devices</a>
@@ -37,9 +37,51 @@
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
-        </div> -->
+        </div>
     </nav>
 </div>
 <div>
     <router-outlet></router-outlet>
-</div>
+</div> -->
+
+
+
+
+
+
+<mat-drawer-container
+  [class.drawer-opened]="drawer.opened"
+  class="example-container">
+  <mat-drawer #drawer 
+    class="drawer" 
+    mode="over">
+
+    <mat-toolbar class="header">
+      <img src="../../../assets/img/GoCleanlogo.png" style="width: 110px;height: 80px;"/>
+      <mat-icon class="close"
+     (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+      <button>Devices</button>
+      <button>Cleaning cycle</button>
+    </div>
+  </mat-drawer>
+  
+  <mat-toolbar class="main header">
+    <mat-icon
+      *ngIf="!drawer.opened"
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <div style="margin-left: 20px;letter-spacing: 2px;font-size: 25px;font-weight: 400;color: green;">GoClean</div>
+  </mat-toolbar>
+
+  <div class="main contents">
+    <router-outlet></router-outlet>
+  </div>
+
+
+  <!-- <mat-toolbar class="main footer">
+    Footer
+  </mat-toolbar> -->
+</mat-drawer-container>

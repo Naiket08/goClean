@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('drawer', { static: true })
+  public drawer!: MatDrawer;
+  constructor(private route:Router) { }
 
   ngOnInit(): void {
   }
 
   public isCollapsed = true;
+
+  menu(value:any){
+    this.route.navigateByUrl(value);
+    this.drawer.close();
+  }
+
+  logout(){
+    localStorage.setItem('SeesionUser','');
+    this.route.navigateByUrl('/login') 
+  }
 
 }

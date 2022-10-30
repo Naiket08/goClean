@@ -23,6 +23,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { AuthguardServiceService } from './authguard-service.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { MatIconModule } from '@angular/material/icon';
     AppRoutingModule,
     MatMenuModule,
     MatSidenavModule,
+    MatRadioModule,
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
@@ -52,7 +55,9 @@ import { MatIconModule } from '@angular/material/icon';
     providePerformance(() => getPerformance()),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    AuthguardServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

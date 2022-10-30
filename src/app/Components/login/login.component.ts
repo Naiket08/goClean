@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+      // localStorage.setItem('SeesionUser',this.userNameRegister)  
   }
 
   refresh(): void {
@@ -98,6 +99,7 @@ export class LoginComponent implements OnInit {
       console.log(response.user)
       this.userLoginFailed = false;
       this.router.navigateByUrl("/Home")
+      localStorage.setItem('SeesionUser',this.userNameLogin) 
     })
     .catch((err) =>{
       console.log(err)

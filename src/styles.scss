@@ -6,8 +6,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-menu-panel{
     width: auto !important;
     margin-left: 10px !important;
+    margin-top: 20px !important;
 }
 
 .mat-toolbar{
     background-color: white !important;
+}
+
+.mat-menu-content:not(:empty){
+    padding: 0 !important;
 }

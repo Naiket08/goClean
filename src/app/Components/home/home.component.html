@@ -44,36 +44,39 @@
     <router-outlet></router-outlet>
 </div> -->
 
-
-
-
-
-
-<mat-drawer-container
-  [class.drawer-opened]="drawer.opened"
-  class="example-container">
-  <mat-drawer #drawer 
-    class="drawer" 
-    mode="over">
+<mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
+  <mat-drawer #drawer class="drawer" mode="over">
 
     <mat-toolbar class="header">
-      <img src="../../../assets/img/GoCleanlogo.png" style="width: 110px;height: 80px;"/>
-      <mat-icon class="close"
-     (click)="drawer.close()">close</mat-icon>
+      <img src="../../../assets/img/GoCleanlogo.png" style="width: 110px;height: 80px;margin-top: 10px;" />
+      <mat-icon style="cursor: pointer;margin-top: 15px;" class="close" (click)="drawer.close()">close</mat-icon>
     </mat-toolbar>
-    <div class="contents">
-      <button>Devices</button>
-      <button>Cleaning cycle</button>
+    <hr style="margin-top: 80px;height: 2px;box-shadow: rgba(255, 255, 255, 0.5);">
+    <div style="margin: 10px 0 0 0;" class="row">
+      <button class="menuButtons" (click)="menu('/Home')">Dashboard</button>
+      <button class="menuButtons" (click)="menu('/Home/Devices')">Devices</button>
+      <button class="menuButtons" (click)="menu('/Home/CleaningCycle')">Cleaning cycle</button>
     </div>
   </mat-drawer>
-  
+
   <mat-toolbar class="main header">
-    <mat-icon
-      *ngIf="!drawer.opened"
-      (click)="drawer.toggle()">
+    <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()" style="cursor: pointer;">
       menu
     </mat-icon>
     <div style="margin-left: 20px;letter-spacing: 2px;font-size: 25px;font-weight: 400;color: green;">GoClean</div>
+    <div style="position: fixed;right: 30px;">
+        <mat-icon class="profileIcon">account_circle</mat-icon>
+        <mat-icon style="position: absolute;top: 10px;" [matMenuTriggerFor]="menuI">arrow_drop_down</mat-icon>
+        <mat-menu #menuI="matMenu">
+          <button mat-menu-item>My Account</button>
+          <hr style="margin: 0;height: 1px;background-color: #1B5043;opacity: 1;">
+          <button mat-menu-item>Forgot Password</button>
+          <hr style="margin: 0;height: 1px;background-color: #1B5043;opacity: 1;">
+          <button mat-menu-item>Change Password</button>
+          <hr style="margin: 0;height: 1px;background-color: #1B5043;opacity: 1;">
+          <button mat-menu-item (click)="logout()">Log out</button>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 
   <div class="main contents">

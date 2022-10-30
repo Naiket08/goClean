@@ -1,5 +1,5 @@
 .mat-menu-item{
-    background-color: lightgray;
+    background-color: white;
 }
 
 .mat-menu-item:hover{
@@ -55,4 +55,25 @@ mat-drawer-content {
     width: 100%;
   }
   
-  
+  .menuButtons{
+    height: 50px;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+  }
+
+  .menuButtons:hover{
+    height: 50px;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: #1B5043;
+    color: white;
+  }
+
+  .profileIcon{
+    width: auto !important;
+    height: auto !important;
+    font-size: 40px !important;
+  }

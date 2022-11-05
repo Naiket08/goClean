@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { UserinfoService } from '../helper/userinfo.service'; 
 
 
 @Component({
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('drawer', { static: true })
   public drawer!: MatDrawer;
-  constructor(private route:Router) { }
+  constructor(private route:Router, public userervicedata : UserinfoService) { }
 
   ngOnInit(): void {
 
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
   logout(){
     localStorage.setItem('SeesionUser','');
     this.route.navigateByUrl('/login') 
+    this.userervicedata.getCurrentUserUniqueId("");
   }
 
 }

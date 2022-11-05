@@ -1,11 +1,12 @@
 import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
+import { getDatabase, ref, set } from "firebase/database";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-
+import { UserinfoService } from '../helper/userinfo.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   userCreatedFailed = false;
   
 
-  constructor( public auth :Auth , public router: Router ,private fb: FormBuilder, public afAuth: AngularFireAuth) {}
+  constructor( public auth :Auth , public router: Router ,private fb: FormBuilder, public afAuth: AngularFireAuth, public getUserInfo : UserinfoService) {}
 
   loginForm = this.fb.group({
     userNameLogin: new FormControl('', Validators.compose([Validators.required])),
@@ -72,20 +73,44 @@ export class LoginComponent implements OnInit {
     window.location.reload();
 }
 
+  
+
+  addUserToDb(userID:any , username:any ){ // adds users to Real time Data base in firebase
+    const db = getDatabase();
+  set(ref(db, 'Customers/' + userID), {
+    userdetails: {
+      name: username,
+      lastname : 'lastname',
+      emailId : 'emailId',
+      PhoneNumber: 2321312312,
+    },
+    devices : {
+      laundryBasketStatus: 30,
+      DustbinStatus: 'Full'
+    }
+
+  });
+
+
+  }
+
   onSubmitHandleRegister(){
 
     createUserWithEmailAndPassword(this.auth, this.userNameRegister, this.passwordRegister)
     .then((response : any)=>{
       this.userCreatedSuccess = !this.userCreatedSuccess;
       this.userCreatedFailed = false;
-      
       console.log(response)
+      console.log(response.user.reloadUserInfo.localId)
 
-      setTimeout(() => {
-        console.log("Delayed for 2 second.");
-        this.refresh();
+      this.addUserToDb(response.user.reloadUserInfo.localId,this.userNameRegister );
+      
 
-      }, 4000)
+      // setTimeout(() => {
+      //   console.log("Delayed for 2 second.");
+      //   this.refresh();
+
+      // }, 4000)
     
     })
     .catch((err) =>{
@@ -103,7 +128,10 @@ export class LoginComponent implements OnInit {
       console.log(response.user)
       this.userLoginFailed = false;
       this.router.navigateByUrl("/Home")
-      localStorage.setItem('SeesionUser',this.userNameLogin) 
+      console.log(response.user.reloadUserInfo.localId);
+      localStorage.setItem('SeesionUser',this.userNameLogin)
+      this.getUserInfo.getCurrentUserUniqueId(response.user.reloadUserInfo.localId);
+
     })
     .catch((err) =>{
       console.log(err)
@@ -125,9 +153,12 @@ export class LoginComponent implements OnInit {
     return this.afAuth.signInWithPopup(new GoogleAuthProvider)
     .then((response:any) =>{
       console.log('google signin success');
+      console.log(response.user.uid);
       
       localStorage.setItem('SeesionUser',this.userNameLogin); 
       this.router.navigateByUrl("/Home");
+      console.log(response);
+      this.getUserInfo.getCurrentUserUniqueId(response.user.uid);
       
     }).catch((err)=>{
       console.log('google signin failed');

@@ -9,9 +9,9 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: 'Home', component: HomeComponent,canActivate:[AuthenticationGuard],
+    path: 'Home', component: HomeComponent,
     children: [
-      { path: '', component: DashboardComponent,canActivate:[AuthenticationGuard]}
+      { path: '', component: DashboardComponent}
     ]
   }
 

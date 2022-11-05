@@ -2,6 +2,10 @@ import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { GoogleAuthProvider } from 'firebase/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,7 +31,7 @@ export class LoginComponent implements OnInit {
   userCreatedFailed = false;
   
 
-  constructor( public auth :Auth , public router: Router ,private fb: FormBuilder) {}
+  constructor( public auth :Auth , public router: Router ,private fb: FormBuilder, public afAuth: AngularFireAuth) {}
 
   loginForm = this.fb.group({
     userNameLogin: new FormControl('', Validators.compose([Validators.required])),
@@ -114,6 +118,27 @@ export class LoginComponent implements OnInit {
     this.displaySignUp = !this.displaySignUp
     
   }
+
+  onGoogleSignIn(){
+
+
+    return this.afAuth.signInWithPopup(new GoogleAuthProvider)
+    .then((response:any) =>{
+      console.log('google signin success');
+      
+      localStorage.setItem('SeesionUser',this.userNameLogin); 
+      this.router.navigateByUrl("/Home");
+      
+    }).catch((err)=>{
+      console.log('google signin failed');
+    })
+
+    
+
+      
+  }
+
+  
 
 
 

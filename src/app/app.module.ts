@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -25,6 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { AuthguardServiceService } from './authguard-service.service';
+import { LaundryBasketComponent } from './Components/home/sub-components/laundry-basket/laundry-basket.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import { AuthguardServiceService } from './authguard-service.service';
     LoginComponent,
     HomeComponent,
     DashboardComponent,
-
+    LaundryBasketComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,7 @@ import { AuthguardServiceService } from './authguard-service.service';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     providePerformance(() => getPerformance()),
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthguardServiceService

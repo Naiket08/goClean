@@ -34,24 +34,24 @@
     <button type="submit" class="btn btn-primary" (click)="onSubmitHandleLogin()">Submit</button>
   </form> -->
 
-<section class="h-100 gradient-form" style="background-color: #eee;">
-  <div class="container py-5 h-100">
+<section class="h-100 gradient-form" style="background-color: #eee;" >
+  <div class="container py-5 h-100" ngClass="animate__animated animate__fadeIn">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
         <div class="card rounded-3 text-black">
           <div class="row g-0">
-            <div *ngIf=displaySignUp class="col-lg-6 d-flex align-items-center">
+            <div *ngIf=displaySignUp class="col-lg-6 d-flex align-items-center" ngClass="animate__animated animate__fadeIn">
               <img src="../../../assets/img/GoCleanlogo.png" style="width: 100%;height: 50%"/>
             </div>
             <div class="col-lg-6" *ngIf=!displaySignUp>
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center">
-                  <img src="assets\img\GoCleanlogo.png" style="width: 185px;" alt="logo">
+                  <h2>Please login to your account</h2>
                 </div>
 
                 <form [formGroup]="loginForm">
-                  <h4>Please login to your account</h4>
+                  
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example11">Username</label>
@@ -82,10 +82,20 @@
 
                   <div class=" form-outline text-center pt-1 mb-5 pb-1">
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
-                      (click)="onSubmitHandleLogin()" [disabled]="!loginForm.valid">Log
+                      (click)="onSubmitHandleLogin()" [disabled]="!loginForm.valid" style="width: 100%;">Log
                       in</button><br>
-                    <a class="text-muted" href="#!">Forgot password?</a>
+                    <a class="text-muted" href="#!">Forgot password?</a><br>
+                    <p class="text-muted" >or</p><br>
+                    
+                    <button type="button" class="btn btn-outline-light" (click)="onGoogleSignIn()"  style="width: 100%;">
+                      <img src = 'assets\img\google.png'
+                      style="width: 30px;height: 30px"
+                      >
+                      </button>
+                      <p class="text-muted" >instead login with google?</p><br>
                   </div>
+
+                  
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">Don't have an account?</p>
@@ -105,16 +115,16 @@
 
 
 
-            <div class="col-lg-6" *ngIf=displaySignUp>
+            <div class="col-lg-6" *ngIf=displaySignUp ngClass="animate__animated animate__fadeIn">
 
-              <div class="card-body p-md-5 mx-md-4">
+              <div class="card-body p-md-5 mx-md-4" ngClass="animate__animated animate__fadeIn">
 
                 <div class="text-center">
-                  <img src="assets\img\GoCleanlogo.png" style="width: 185px;" alt="logo">
+                  <h2>Please Sign up here</h2>
                 </div>
 
                 <form [formGroup]="registrationForm">
-                  <h4>Please Sign up here</h4>
+                  
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example11">Username</label>
@@ -172,7 +182,7 @@
 
             </div>
 
-            <div *ngIf=!displaySignUp class="col-lg-6 d-flex align-items-center">
+            <div *ngIf=!displaySignUp class="col-lg-6 d-flex align-items-center" >
               <img src="../../../assets/img/GoCleanlogo.png" style="width: 100%;height: 50%"/>
             </div>
 

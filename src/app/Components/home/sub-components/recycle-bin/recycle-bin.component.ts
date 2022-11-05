@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecycleBinComponent implements OnInit {
 
+  empty:boolean=false;
+
   constructor() { }
 
   flipStatus = false; //this flag used to flip the laundry card to detergent 

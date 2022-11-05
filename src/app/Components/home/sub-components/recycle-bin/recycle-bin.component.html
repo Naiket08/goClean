@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card" *ngIf="!flipStatus" style="width:400px" ngClass="animate__animated animate__fadeIn">
         <section>
-            <span class="trash">
+            <span [ngClass]="empty?'trash':'trash-shake'">
                 <span></span>
                 <i></i>
             </span>

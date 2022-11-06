@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecycleBinComponent implements OnInit {
 
-  empty:boolean=true;
+  empty:boolean=false;
 
   constructor() { }
 

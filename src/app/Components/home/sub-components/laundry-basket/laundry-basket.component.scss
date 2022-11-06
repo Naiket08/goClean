@@ -1,5 +1,5 @@
 .box {
-  height: 450px;
+  height: 500px;
   width: 350px;
   margin: auto;
   position: relative;
@@ -10,8 +10,8 @@
 }
 
 .glass {
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   background: white;
   border-style: solid;
   border-color: black;
@@ -58,4 +58,9 @@
   margin: 10px auto;
   border-radius: 50%;
 
+}
+
+.container-size{
+
+  height: 35rem;
 }

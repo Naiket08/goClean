@@ -41,15 +41,16 @@
     }
 
     .washer-door {
-        position: absolute;
+        position: relative;
         height: 130px;
         width: 130px;
         border-radius: 50%;
         border: 11px solid #fff;
         margin: auto;
-        top: 12vw;
-        left: 0;
-        right: 0;
+        margin-top: 165px;
+        // top: 12vw;
+        // left: 0;
+        // right: 0;
         overflow: hidden;
         transform: rotate(0deg);
         transition: transform 200ms;
@@ -166,8 +167,8 @@
 
 .washeroff {
     border: 5px solid #fff;
-    width: 350px;
-    height: 384px;
+    width: 300px;
+    height: 340px;
     border-radius: 28.8px;
     position: relative;
     margin: 0 auto;
@@ -186,8 +187,8 @@
     }
 
     .light {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         position: absolute;
         border-radius: 50%;
         top: 28.8px;
@@ -206,15 +207,16 @@
     }
 
     .washer-door {
-        position: absolute;
-        height: 180px;
-        width: 180px;
+        position: relative;
+        height: 130px;
+        width: 130px;
         border-radius: 50%;
         border: 11px solid #fff;
         margin: auto;
-        top: 12vw;
-        left: 0;
-        right: 0;
+        margin-top: 165px;
+        // top: 12vw;
+        // left: 0;
+        // right: 0;
         overflow: hidden;
         box-shadow: 0 0 10px -4px #000;
 

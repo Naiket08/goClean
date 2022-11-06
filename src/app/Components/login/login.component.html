@@ -1,244 +1,220 @@
-<!-- <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" 
-      id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="username" name = "username ">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name = "password">
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="onSubmitHandleRegister()">Submit</button>
-  </form> -->
-
-<!-- <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" 
-      id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="username" name = "username ">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name = "password">
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="onSubmitHandleLogin()">Submit</button>
-  </form> -->
-
-<section class="h-100 gradient-form" style="background-color: #eee;"  >
-  <div class="container py-5 h-100" ngClass="animate__animated animate__fadeIn">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-10">
-        <div class="card rounded-3 text-black">
-          <div class="row g-0">
-            <div *ngIf=displaySignUp class="col-lg-6 d-flex align-items-center" ngClass="animate__animated animate__fadeIn">
-              <img src="../../../assets/img/GoCleanlogo.png" style="width: 100%;height: 50%"/>
-            </div>
-            <div class="col-lg-6" *ngIf=!displaySignUp>
-              <div class="card-body p-md-5 mx-md-4">
-
-                <div class="text-center">
-                  <h2>Please login to your account</h2>
-                </div>
-
-                <form [formGroup]="loginForm">
-                  
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example11">Username</label>
-                    <input type="email" id="form2Example11" class="form-control" placeholder="Username"
-                    [ngClass]="(loginForm.get('userNameLogin')?.touched||loginForm.get('userNameLogin')?.dirty)&&loginForm.get('userNameLogin')?.errors?'is-invalid':''"
-                      [(ngModel)]="userNameLogin" formControlName="userNameLogin" name="userNameLogin "/>
-                   <div class="invalid-feedback">Username is required</div> 
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example22">Password</label>
-                    <input type="password" id="form2Example22" class="form-control" placeholder="Password"
-                    [ngClass]="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.errors?'is-invalid':''"
-                      [(ngModel)]="passwordLogin" formControlName="passwordLogin" name="passwordLogin"
-                      [maxlength]="30"/>
-                      <div class="invalid-feedback" *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('required')">Password is required</div>
-                      <div class="invalid-feedback" *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('minlength')">Password length should be atleast 8 characters</div>
-                      <div class="invalid-feedback" *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('pattern')">Password must be in correct format</div>
-                  </div>
-
-
-                  <div class="form-outline mb-4">
-                    <div class="alert alert-danger" *ngIf=userLoginFailed role="alert">
-                      Username or Password is Incorrect!
-                    </div>
-                  </div>
-
-
-                  <div class=" form-outline text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
-                      (click)="onSubmitHandleLogin()" [disabled]="!loginForm.valid" style="width: 100%;">Log
-                      in</button><br>
-                    <a class="text-muted" href="#!">Forgot password?</a><br>
-                    <p class="text-muted" >or</p><br>
-                    
-                    <button type="button" class="btn btn-outline-light" (click)="onGoogleSignIn()"  style="width: 100%;">
-                      <img src = 'assets\img\google.png'
-                      style="width: 30px;height: 30px"
-                      >
-                      </button>
-                      <p class="text-muted" >instead login with google?</p><br>
-                  </div>
-
-                  
-
-                  <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Don't have an account?</p>
-                    <button type="button" class="btn btn-outline-danger" (click)="changeDisplaySignup()">Create
-                      new</button>
-                  </div>
-
-                </form>
-
+<div class="full-page-bg">
+  <section class="h-100 gradient-form">
+    <div class="container py-1 h-100" ngClass="animate__animated animate__fadeIn">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black glass-morph-temp">
+            <div class="row g-0">
+              <div *ngIf=displaySignUp class="col-lg-6 d-flex align-items-center"
+                ngClass="animate__animated animate__fadeIn">
+                <img src="../../../assets/img/GoCleanlogo.png" style="width: 100%;height: 50%; margin-left:40px" />
               </div>
-            </div>
+              <div class="col-lg-6" *ngIf=!displaySignUp>
+                <div class="card-body p-md-5 mx-md-4">
+
+                  <div class="text-center">
+                    <h2>Enter Credentials to Login</h2>
+                  </div>
+
+                  <form [formGroup]="loginForm">
+
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example11">Username</label>
+                      <input type="email" id="form2Example11" class="form-control" placeholder="Username"
+                        [ngClass]="(loginForm.get('userNameLogin')?.touched||loginForm.get('userNameLogin')?.dirty)&&loginForm.get('userNameLogin')?.errors?'is-invalid':''"
+                        [(ngModel)]="userNameLogin" formControlName="userNameLogin" name="userNameLogin " />
+                      <div class="invalid-feedback">Username is required</div>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example22">Password</label>
+                      <input type="password" id="form2Example22" class="form-control" placeholder="Password"
+                        [ngClass]="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.errors?'is-invalid':''"
+                        [(ngModel)]="passwordLogin" formControlName="passwordLogin" name="passwordLogin"
+                        [maxlength]="30" />
+                      <div class="invalid-feedback"
+                        *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('required')">
+                        Password is required</div>
+                      <div class="invalid-feedback"
+                        *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('minlength')">
+                        Password length should be atleast 8 characters</div>
+                      <div class="invalid-feedback"
+                        *ngIf="(loginForm.get('passwordLogin')?.touched||loginForm.get('passwordLogin')?.dirty)&&loginForm.get('passwordLogin')?.hasError('pattern')">
+                        Password must be in correct format</div>
+                    </div>
+
+
+                    <div class="form-outline mb-4">
+                      <div class="alert alert-danger" *ngIf=userLoginFailed role="alert">
+                        Username or Password is Incorrect!
+                      </div>
+                    </div>
+
+
+                    <div class=" form-outline text-center pt-1 mb-5 pb-1">
+                      <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
+                        (click)="onSubmitHandleLogin()" [disabled]="!loginForm.valid">Login</button><br>
+                      <a class="text-muted" href="#!">Forgot password?</a><br>
+                      <p class="text-muted">or</p>
+                      <p class="text-muted">Login with google instead?</p><br>
+                      <button type="button" class="google-sign" (click)="onGoogleSignIn()">
+                        <span style="color:#a5bc98"> _________________ </span>
+                        <img src='assets\img\google.png' style="width: 30px;height: 30px">
+                        <span style="color:#a5bc98"> _________________</span>
+                      </button>
+                    </div>
 
 
 
-            <!-- Registration code from here-->
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                      <p class="mb-0">Don't have an account?</p>
+                      <button type="button" class="sign-up" (click)="changeDisplaySignup()">Create
+                        new!</button>
+                    </div>
 
+                  </form>
 
-
-
-            <div class="col-lg-6" *ngIf=displaySignUp ngClass="animate__animated animate__fadeIn">
-
-              <div class="card-body p-md-5 mx-md-4" ngClass="animate__animated animate__fadeIn">
-
-                <div class="text-center">
-                  <h2>Please Sign up here</h2>
                 </div>
-
-                <form [formGroup]="registrationForm">
-
+              </div>
 
 
 
+              <!-- Registration code from here-->
 
 
 
-                  <div class = "container fluid">
-                  <div class="form-outline mb-2">
-                    
-                      <div class = row>
 
+              <div class="col-lg-6" *ngIf=displaySignUp ngClass="animate__animated animate__fadeIn">
+
+                <div class="card-body p-md-5 mx-md-4" ngClass="animate__animated animate__fadeIn">
+
+                  <div class="text-center">
+                    <h2>Please Sign up here</h2>
+                  </div>
+
+                  <form [formGroup]="registrationForm">
+
+
+
+
+
+
+
+                    <div class="container fluid">
+                      <div class="form-outline mb-2">
+
+                        <div class=row>
+
+
+                          <div class="col-sm">
+                            <label class="form-label" for="form2Example11">First Name</label>
+                            <input type="email" id="form2Example11" class="form-control" placeholder="First name"
+                              [(ngModel)]="firstName" formControlName="firstName" name=" FirstName">
+                          </div>
+                          <div class="col-sm">
+                            <label class="form-label" for="form2Example11">Last Name</label>
+                            <input type="email" id="form2Example11" class="form-control" placeholder="Last name"
+                              name=" LastName" [(ngModel)]="lastName" formControlName="lastName">
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row mb-2">
 
                         <div class="col-sm">
-                          <label class="form-label" for="form2Example11">First Name</label>
-                          <input type="email" id="form2Example11" class="form-control" placeholder="First name" 
-                          [(ngModel)]="firstName" formControlName = "firstName" name=" FirstName">
+                          <label class="form-label" for="form2Example11">Mobile Numer</label>
+                          <input type="email" id="form2Example11" class="form-control" placeholder="Mobile Number"
+                            name=" Mobile Number" [(ngModel)]="mobileNumber" formControlName="mobileNumber" />
+                        </div>
                       </div>
-                      <div class="col-sm">
-                          <label class="form-label" for="form2Example11">Last Name</label>
-                          <input type="email" id="form2Example11" class="form-control" placeholder="Last name" name=" LastName"
-                          [(ngModel)]="lastName" formControlName = "lastName"
-                          >
-                      </div>
-                      </div>
-                    </div>
-
-
-                  <div class = row>
-
-                    <div class="col-sm">
-                      <label class="form-label" for="form2Example11">Mobile Numer</label>
-                      <input type="email" id="form2Example11" class="form-control" placeholder="Mobile Number" name=" Mobile Number"
-                      [(ngModel)]="mobileNumber" formControlName = "mobileNumber"
-                      />
-
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form2Example11">Username</label>
+                        <input type="email" id="form2Example11" class="form-control" placeholder="Email address"
+                          [ngClass]="(registrationForm.get('userNameRegister')?.touched||registrationForm.get('userNameRegister')?.dirty)&&registrationForm.get('userNameRegister')?.errors?'is-invalid':''"
+                          [(ngModel)]="userNameRegister" formControlName="userNameRegister" name="userNameRegister " />
+                        <div class="invalid-feedback">Username is required</div>
                       </div>
 
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form2Example22">Password</label>
+                        <input type="password" id="form2Example22" class="form-control" placeholder="Password"
+                          [ngClass]="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.errors?'is-invalid':''"
+                          [(ngModel)]="passwordRegister" formControlName="passwordRegister" name="passwordRegister" />
+                        <div class="invalid-feedback"
+                          *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('required')">
+                          Password is required</div>
+                        <div class="invalid-feedback"
+                          *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('minlength')">
+                          Password length should be atleast 8 characters</div>
+                        <div class="invalid-feedback"
+                          *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('pattern')">
+                          Password must be in correct format</div>
+                      </div>
 
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form2Example22">Re Enter Password</label>
+                        <input type="password" id="form2Example22" class="form-control" placeholder="Password"
+                          [ngClass]="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.errors?'is-invalid':''"
+                          [(ngModel)]="reTypePasswordRegister" formControlName="reTypePasswordRegister"
+                          name="reTypePasswordRegister" />
+                        <div class="invalid-feedback"
+                          *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('required')">
+                          Password is required</div>
+                        <div class="invalid-feedback"
+                          *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('minlength')">
+                          Password length should be atleast 8 characters</div>
+                        <div class="invalid-feedback"
+                          *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('pattern')">
+                          Password must be in correct format</div>
+                        <!-- <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('MustMatch')">Password do not match</div> -->
+                      </div>
+
+                      <div class="form-outline mb-2">
+                        <div class="alert alert-success" *ngIf=userCreatedSuccess role="alert">
+                          User has been created!
+                        </div>
+                        <div class="alert alert-danger" *ngIf=userCreatedFailed role="alert">
+                          User already exists!
+                        </div>
+                      </div>
+
+                      <div class=" form-outline text-center pt-1 mb-5 pb-1">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
+                          (click)="onSubmitHandleRegister()" [disabled]="!registrationForm.valid">
+                         Let's Clean</button><br>
+                      </div>
+
+
+                      <div class="d-flex align-items-center justify-content-center pb-4">
+                        <p class="mb-0">Already have an account?</p>
+                        <button type="button" class=""
+                          (click)="changeDisplaySignup()" class="sign-up">Login!</button>
+                      </div>
                     </div>
+                  </form>
 
-
-
-
-                  <div class="form-outline mb-2">
-                    <label class="form-label" for="form2Example11">Username</label>
-                    <input type="email" id="form2Example11" class="form-control" placeholder="Email address"
-                    [ngClass]="(registrationForm.get('userNameRegister')?.touched||registrationForm.get('userNameRegister')?.dirty)&&registrationForm.get('userNameRegister')?.errors?'is-invalid':''"
-                      [(ngModel)]="userNameRegister" formControlName="userNameRegister" name="userNameRegister " />
-                      <div class="invalid-feedback">Username is required</div> 
-                  </div>
-
-                  <div class="form-outline mb-2">
-                    <label class="form-label" for="form2Example22">Password</label>
-                    <input type="password" id="form2Example22" class="form-control" placeholder="Password"
-                    [ngClass]="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.errors?'is-invalid':''"
-                      [(ngModel)]="passwordRegister" formControlName="passwordRegister" name="passwordRegister" />
-                      <div class="invalid-feedback" *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('required')">Password is required</div>
-                      <div class="invalid-feedback" *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('minlength')">Password length should be atleast 8 characters</div>
-                      <div class="invalid-feedback" *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('pattern')">Password must be in correct format</div>
-                  </div>
-
-                  <div class="form-outline mb-2">
-                    <label class="form-label" for="form2Example22">Re Enter Password</label>
-                    <input type="password" id="form2Example22" class="form-control" placeholder="Password" 
-                    [ngClass]="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.errors?'is-invalid':''"
-                    [(ngModel)]="reTypePasswordRegister" formControlName="reTypePasswordRegister" name="reTypePasswordRegister"/>
-                    <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('required')">Password is required</div>
-                      <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('minlength')">Password length should be atleast 8 characters</div>
-                      <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('pattern')">Password must be in correct format</div>
-                      <!-- <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('MustMatch')">Password do not match</div> -->
-                  </div>
-
-                  <div class="form-outline mb-2">
-                    <div class="alert alert-success" *ngIf=userCreatedSuccess role="alert">
-                      User has been created!
-                    </div>
-                    <div class="alert alert-danger" *ngIf=userCreatedFailed role="alert">
-                      User already exists!
-                    </div>
-                  </div>
-
-                  <div class=" form-outline text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
-                      (click)="onSubmitHandleRegister()" style="width: 100%;" [disabled]="!registrationForm.valid">
-                      Sign Up</button><br> 
-                  </div>
-
-
-                  <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Already have an account?</p>
-                    <button type="button" class="btn btn-outline-danger" (click)="changeDisplaySignup()">Login</button>
-                  </div>
                 </div>
-                </form>
+
 
               </div>
 
+              <div *ngIf=!displaySignUp class="col-lg-6 d-flex align-items-center">
+                <img src="../../../assets/img/GoCleanlogo.png" style="width: 100%;height: 50%; margin-right:40px" />
+              </div>
+
+
+
+
+
+
+
 
             </div>
-
-            <div *ngIf=!displaySignUp class="col-lg-6 d-flex align-items-center" >
-              <img src="../../../assets/img/GoCleanlogo.png" style="width: 100%;height: 50%"/>
-            </div>
-
-
-
-
-
-
-
-
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

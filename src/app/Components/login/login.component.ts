@@ -1,22 +1,22 @@
 import { Router, RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { getDatabase, ref, set } from "firebase/database";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { UserinfoService } from '../helper/userinfo.service';
+import introJs from 'intro.js';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   passPattern = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/g);
 
-  userNameLogin= "";
+  userNameLogin = "";
   passwordLogin = "";
 
   firstName = "";
@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
 
   userCreatedSuccess = false;
   userCreatedFailed = false;
-  
 
-  constructor( public auth :Auth , public router: Router ,private fb: FormBuilder, public afAuth: AngularFireAuth, public getUserInfo : UserinfoService) {}
+
+  constructor(public auth: Auth, public router: Router, private fb: FormBuilder, public afAuth: AngularFireAuth, public getUserInfo: UserinfoService) { }
 
   loginForm = this.fb.group({
     userNameLogin: new FormControl('', Validators.compose([Validators.required])),
@@ -49,11 +49,11 @@ export class LoginComponent implements OnInit {
     mobileNumber: new FormControl('', Validators.compose([Validators.required])),
     userNameRegister: new FormControl('', Validators.compose([Validators.required])),
     passwordRegister: new FormControl('', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(this.passPattern)])),
-    reTypePasswordRegister : new FormControl('', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(this.passPattern)]))
+    reTypePasswordRegister: new FormControl('', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(this.passPattern)]))
   },
-  // {
-  //   validators:this.MustMatch('passwordRegister','reTypePasswordRegister')
-  // }
+    // {
+    //   validators:this.MustMatch('passwordRegister','reTypePasswordRegister')
+    // }
   );
 
   // MustMatch(password:any,confirmPass:any){
@@ -73,16 +73,17 @@ export class LoginComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-      // localStorage.setItem('SeesionUser',this.userNameRegister)  
+
+    // localStorage.setItem('SeesionUser',this.userNameRegister)  
   }
 
   refresh(): void {
     window.location.reload();
-}
+  }
 
-  
 
-  addUserToDb(userID:any , username:any ){ // adds users to Real time Data base in firebase
+
+  addUserToDb(userID: any, username: any) { // adds users to Real time Data base in firebase
     const db = getDatabase();
   set(ref(db, 'Customers/' + userID), {
     userdetails: {
@@ -98,22 +99,21 @@ export class LoginComponent implements OnInit {
       ventStatus: 'clean'
     }
 
-  });
+    });
 
 
   }
 
-  onSubmitHandleRegister(){
+  onSubmitHandleRegister() {
 
     createUserWithEmailAndPassword(this.auth, this.userNameRegister, this.passwordRegister)
-    .then((response : any)=>{
-      this.userCreatedSuccess = !this.userCreatedSuccess;
-      this.userCreatedFailed = false;
-      console.log(response)
-      console.log(response.user.reloadUserInfo.localId)
+      .then((response: any) => {
+        this.userCreatedSuccess = !this.userCreatedSuccess;
+        this.userCreatedFailed = false;
+        console.log(response)
+        console.log(response.user.reloadUserInfo.localId)
 
-      this.addUserToDb(response.user.reloadUserInfo.localId,this.userNameRegister );
-      
+        this.addUserToDb(response.user.reloadUserInfo.localId, this.userNameRegister);
 
       setTimeout(() => {
         console.log("Delayed for 2 second.");
@@ -126,59 +126,66 @@ export class LoginComponent implements OnInit {
       console.log(err.message);
       this.userCreatedFailed = !this.userCreatedFailed;
 
-    })
+        // }, 4000)
+
+      })
+      .catch((err) => {
+        console.log(err.message);
+        this.userCreatedFailed = !this.userCreatedFailed;
+
+      })
 
   }
 
-  onSubmitHandleLogin(){
+  onSubmitHandleLogin() {
 
     signInWithEmailAndPassword(this.auth, this.userNameLogin, this.passwordLogin)
-    .then((response : any)=>{
-      console.log(response.user)
-      this.userLoginFailed = false;
-      this.router.navigateByUrl("/Home")
-      console.log(response.user.reloadUserInfo.localId);
-      localStorage.setItem('SeesionUser',this.userNameLogin)
-      this.getUserInfo.getCurrentUserUniqueId(response.user.reloadUserInfo.localId);
+      .then((response: any) => {
+        console.log(response.user)
+        this.userLoginFailed = false;
+        this.router.navigateByUrl("/Home")
+        console.log(response.user.reloadUserInfo.localId);
+        localStorage.setItem('SeesionUser', this.userNameLogin)
+        this.getUserInfo.getCurrentUserUniqueId(response.user.reloadUserInfo.localId);
 
-    })
-    .catch((err) =>{
-      console.log(err)
-      this.userLoginFailed = !this.userLoginFailed;
+      })
+      .catch((err) => {
+        console.log(err)
+        this.userLoginFailed = !this.userLoginFailed;
 
-    })
+      })
 
   }
 
-  changeDisplaySignup(){
+  changeDisplaySignup() {
 
     this.displaySignUp = !this.displaySignUp
-    
+
   }
 
-  onGoogleSignIn(){
+  onGoogleSignIn() {
 
 
     return this.afAuth.signInWithPopup(new GoogleAuthProvider)
-    .then((response:any) =>{
-      console.log('google signin success');
-      console.log(response.user.uid);
-      
-      localStorage.setItem('SeesionUser',this.userNameLogin); 
-      this.router.navigateByUrl("/Home");
-      console.log(response);
-      this.getUserInfo.getCurrentUserUniqueId(response.user.uid);
-      
-    }).catch((err)=>{
-      console.log('google signin failed');
-    })
+      .then((response: any) => {
+        console.log('google signin success');
+        console.log(response.user.uid);
 
-    
+        localStorage.setItem('SeesionUser', this.userNameLogin);
+        this.router.navigateByUrl("/Home");
+        console.log(response);
+        this.getUserInfo.getCurrentUserUniqueId(response.user.uid);
 
-      
+      }).catch((err) => {
+        console.log('google signin failed');
+      })
+
+
+
+
   }
 
-  
+
 
 
 

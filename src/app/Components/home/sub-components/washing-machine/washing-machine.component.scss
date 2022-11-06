@@ -1,0 +1,231 @@
+.washer {
+    border: 5px solid #fff;
+    width: 350px;
+    height: 384px;
+    border-radius: 28.8px;
+    position: relative;
+    margin: 0 auto;
+    top: 0px;
+    margin-top: 10%;
+    display: block;
+    background: #023776;
+    animation: machine-shake 12s ease 1s infinite;
+
+    .top-line {
+        height: 8px;
+        width: 100%;
+        position: absolute;
+        top: 115.2px;
+        left: 0;
+        background-color: #fff;
+    }
+
+    .light {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        border-radius: 50%;
+        top: 28.8px;
+    }
+
+    .washer-on {
+        background: limegreen;
+        right: 20px;
+        opacity: 1;
+    }
+
+    .washer-off {
+        background: red;
+        right: 50px;
+        opacity: 0;
+    }
+
+    .washer-door {
+        position: absolute;
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+        border: 11px solid #fff;
+        margin: auto;
+        top: 12vw;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        transform: rotate(0deg);
+        transition: transform 200ms;
+        animation: spin-cycle 12s ease 1s infinite;
+        box-shadow: 0 0 10px -4px #000;
+
+        .washer-load {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: #63aaff;
+            width: 100%;
+            height: 80px;
+            border-radius: 50%;
+            animation: warp-load 12s ease 1s infinite;
+        }
+    }
+}
+
+@keyframes spin-cycle {
+    0% {
+        transform: rotate(14400deg);
+    }
+
+    66% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes off-on {
+    0% {
+        opacity: 0;
+    }
+
+    66% {
+        opacity: 0;
+    }
+
+    67% {
+        opacity: 1;
+    }
+}
+
+@keyframes on-off {
+    2% {
+        opacity: 0;
+    }
+
+    2% {
+        opacity: 1;
+    }
+
+    66% {
+        opacity: 1;
+    }
+
+    67% {
+        opacity: 0;
+    }
+}
+
+@keyframes warp-load {
+    2% {
+        border-radius: 0;
+    }
+
+    55% {
+        border-radius: 0;
+    }
+
+    67% {
+        border-radius: 50%;
+    }
+}
+
+@keyframes machine-shake {
+
+    13%,
+    15%,
+    17%,
+    19%,
+    21%,
+    23%,
+    25%,
+    26%,
+    28% {
+        top: 1px;
+        transform: rotate(0.35deg)
+    }
+
+    10%,
+    12%,
+    14%,
+    16%,
+    18%,
+    20%,
+    22%,
+    24%,
+    27%,
+    29% {
+        top: 0;
+        transform: rotate(0deg)
+    }
+
+    11%,
+    19%,
+    23% {
+        top: 1.5px;
+        transform: rotate(-0.25deg)
+    }
+}
+
+//Washer off status
+
+.washeroff {
+    border: 5px solid #fff;
+    width: 350px;
+    height: 384px;
+    border-radius: 28.8px;
+    position: relative;
+    margin: 0 auto;
+    top: 0px;
+    margin-top: 10%;
+    display: block;
+    background: #023776;
+
+    .top-line {
+        height: 8px;
+        width: 100%;
+        position: absolute;
+        top: 115.2px;
+        left: 0;
+        background-color: #fff;
+    }
+
+    .light {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        border-radius: 50%;
+        top: 28.8px;
+    }
+
+    .washer-on {
+        background: limegreen;
+        right: 20px;
+        opacity: 0;
+    }
+
+    .washer-off {
+        background: red;
+        right: 50px;
+        opacity: 1;
+    }
+
+    .washer-door {
+        position: absolute;
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+        border: 11px solid #fff;
+        margin: auto;
+        top: 12vw;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        box-shadow: 0 0 10px -4px #000;
+
+        .washer-load {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: #63aaff;
+            width: 100%;
+            height: 80px;
+            border-radius: 50%;
+        }
+    }
+}

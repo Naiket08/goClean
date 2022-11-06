@@ -28,6 +28,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { AuthguardServiceService } from './authguard-service.service';
 import { LaundryBasketComponent } from './Components/home/sub-components/laundry-basket/laundry-basket.component';
 import { RecycleBinComponent } from './Components/home/sub-components/recycle-bin/recycle-bin.component';
+import { WashingMachineComponent } from './Components/home/sub-components/washing-machine/washing-machine.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { RecycleBinComponent } from './Components/home/sub-components/recycle-bi
     HomeComponent,
     DashboardComponent,
     LaundryBasketComponent,
-    RecycleBinComponent
+    RecycleBinComponent,
+    WashingMachineComponent
   ],
   imports: [
     BrowserModule,

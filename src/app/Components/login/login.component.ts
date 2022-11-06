@@ -19,6 +19,10 @@ export class LoginComponent implements OnInit {
   userNameLogin= "";
   passwordLogin = "";
 
+  firstName = "";
+  lastName = "";
+  mobileNumber = "";
+
   userNameRegister = "";
   passwordRegister = "";
   reTypePasswordRegister = "";
@@ -40,6 +44,9 @@ export class LoginComponent implements OnInit {
   });
 
   registrationForm = this.fb.group({
+    firstName: new FormControl('', Validators.compose([Validators.required])),
+    lastName: new FormControl('', Validators.compose([Validators.required])),
+    mobileNumber: new FormControl('', Validators.compose([Validators.required])),
     userNameRegister: new FormControl('', Validators.compose([Validators.required])),
     passwordRegister: new FormControl('', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(this.passPattern)])),
     reTypePasswordRegister : new FormControl('', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(this.passPattern)]))
@@ -79,14 +86,16 @@ export class LoginComponent implements OnInit {
     const db = getDatabase();
   set(ref(db, 'Customers/' + userID), {
     userdetails: {
-      name: username,
-      lastname : 'lastname',
-      emailId : 'emailId',
-      PhoneNumber: 2321312312,
+      firstname: this.firstName,
+      lastname : this.lastName,
+      emailId : username,
+      PhoneNumber: this.mobileNumber,
+      isNewUser: true
     },
     devices : {
       laundryBasketStatus: 30,
-      DustbinStatus: 'Full'
+      DustbinStatus: true,
+      ventStatus: 'clean'
     }
 
   });
@@ -106,11 +115,11 @@ export class LoginComponent implements OnInit {
       this.addUserToDb(response.user.reloadUserInfo.localId,this.userNameRegister );
       
 
-      // setTimeout(() => {
-      //   console.log("Delayed for 2 second.");
-      //   this.refresh();
+      setTimeout(() => {
+        console.log("Delayed for 2 second.");
+        this.refresh();
 
-      // }, 4000)
+      }, 4000)
     
     })
     .catch((err) =>{

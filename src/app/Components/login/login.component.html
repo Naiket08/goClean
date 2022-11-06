@@ -34,7 +34,7 @@
     <button type="submit" class="btn btn-primary" (click)="onSubmitHandleLogin()">Submit</button>
   </form> -->
 
-<section class="h-100 gradient-form" style="background-color: #eee;" >
+<section class="h-100 gradient-form" style="background-color: #eee;"  >
   <div class="container py-5 h-100" ngClass="animate__animated animate__fadeIn">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
@@ -124,9 +124,51 @@
                 </div>
 
                 <form [formGroup]="registrationForm">
-                  
 
-                  <div class="form-outline mb-4">
+
+
+
+
+
+
+                  <div class = "container fluid">
+                  <div class="form-outline mb-2">
+                    
+                      <div class = row>
+
+
+                        <div class="col-sm">
+                          <label class="form-label" for="form2Example11">First Name</label>
+                          <input type="email" id="form2Example11" class="form-control" placeholder="First name" 
+                          [(ngModel)]="firstName" formControlName = "firstName" name=" FirstName">
+                      </div>
+                      <div class="col-sm">
+                          <label class="form-label" for="form2Example11">Last Name</label>
+                          <input type="email" id="form2Example11" class="form-control" placeholder="Last name" name=" LastName"
+                          [(ngModel)]="lastName" formControlName = "lastName"
+                          >
+                      </div>
+                      </div>
+                    </div>
+
+
+                  <div class = row>
+
+                    <div class="col-sm">
+                      <label class="form-label" for="form2Example11">Mobile Numer</label>
+                      <input type="email" id="form2Example11" class="form-control" placeholder="Mobile Number" name=" Mobile Number"
+                      [(ngModel)]="mobileNumber" formControlName = "mobileNumber"
+                      />
+
+                      </div>
+
+
+                    </div>
+
+
+
+
+                  <div class="form-outline mb-2">
                     <label class="form-label" for="form2Example11">Username</label>
                     <input type="email" id="form2Example11" class="form-control" placeholder="Email address"
                     [ngClass]="(registrationForm.get('userNameRegister')?.touched||registrationForm.get('userNameRegister')?.dirty)&&registrationForm.get('userNameRegister')?.errors?'is-invalid':''"
@@ -134,7 +176,7 @@
                       <div class="invalid-feedback">Username is required</div> 
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-2">
                     <label class="form-label" for="form2Example22">Password</label>
                     <input type="password" id="form2Example22" class="form-control" placeholder="Password"
                     [ngClass]="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.errors?'is-invalid':''"
@@ -144,7 +186,7 @@
                       <div class="invalid-feedback" *ngIf="(registrationForm.get('passwordRegister')?.touched||registrationForm.get('passwordRegister')?.dirty)&&registrationForm.get('passwordRegister')?.hasError('pattern')">Password must be in correct format</div>
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-2">
                     <label class="form-label" for="form2Example22">Re Enter Password</label>
                     <input type="password" id="form2Example22" class="form-control" placeholder="Password" 
                     [ngClass]="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.errors?'is-invalid':''"
@@ -155,7 +197,7 @@
                       <!-- <div class="invalid-feedback" *ngIf="(registrationForm.get('reTypePasswordRegister')?.touched||registrationForm.get('reTypePasswordRegister')?.dirty)&&registrationForm.get('reTypePasswordRegister')?.hasError('MustMatch')">Password do not match</div> -->
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-outline mb-2">
                     <div class="alert alert-success" *ngIf=userCreatedSuccess role="alert">
                       User has been created!
                     </div>
@@ -166,8 +208,8 @@
 
                   <div class=" form-outline text-center pt-1 mb-5 pb-1">
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
-                      (click)="onSubmitHandleRegister()" [disabled]="!registrationForm.valid">
-                      Sign Up</button><br>
+                      (click)="onSubmitHandleRegister()" style="width: 100%;" [disabled]="!registrationForm.valid">
+                      Sign Up</button><br> 
                   </div>
 
 
@@ -175,6 +217,7 @@
                     <p class="mb-0 me-2">Already have an account?</p>
                     <button type="button" class="btn btn-outline-danger" (click)="changeDisplaySignup()">Login</button>
                   </div>
+                </div>
                 </form>
 
               </div>

@@ -7,7 +7,6 @@ import introJs from 'intro.js';
 })
 export class IntrojsService {
   featureOne() {
-    debugger;
     var intro = introJs();
 
     intro.setOptions({

@@ -30,6 +30,10 @@ import { AuthguardServiceService } from './authguard-service.service';
 import { LaundryBasketComponent } from './Components/home/sub-components/laundry-basket/laundry-basket.component';
 import { RecycleBinComponent } from './Components/home/sub-components/recycle-bin/recycle-bin.component';
 import { WashingMachineComponent } from './Components/home/sub-components/washing-machine/washing-machine.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './Store/userInfo/userInfo.reducer';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,11 @@ import { WashingMachineComponent } from './Components/home/sub-components/washin
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     providePerformance(() => getPerformance()),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot({}, {}),
+    StoreModule.forFeature('users', reducers),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     AuthguardServiceService

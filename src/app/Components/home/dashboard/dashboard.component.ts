@@ -1,5 +1,7 @@
 import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { get } from 'firebase/database';
+import * as userDetails from 'src/app/Store/userInfo/userInfo.action';
 import { UserinfoService } from '../../helper/userinfo.service';
 
 @Component({
@@ -10,9 +12,8 @@ import { UserinfoService } from '../../helper/userinfo.service';
 export class DashboardComponent implements OnInit {
   public userInformation: any;
 
-  constructor(public userdata: UserinfoService) {
-    debugger;
-this.setData();
+  constructor(private store: Store, public userdata: UserinfoService) {
+    this.setData();
   }
 
   ngOnInit(): void {
@@ -25,24 +26,11 @@ this.setData();
   public setData() {
     const data = this.userdata.currentUserUniqueId;
     if (data) {
-      this.userdata.getUserInfo().subscribe(value=>
-      this.userInformation=value);
-      console.log(this.userInformation);
-    
+      this.userdata.getUserInfo();
+
     }
   }
   data = this.userdata.currentUserUniqueId;
-
-
-
-  getUserInfor() {
-    console.log(this.userdata.currentUserUniqueId);
-    this.userdata.getUserInfo().subscribe(value=>
-      this.userInformation=value);
-      console.log(this.userInformation);
-
-  }
-
 
 
 }

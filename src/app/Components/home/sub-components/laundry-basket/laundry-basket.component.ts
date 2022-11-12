@@ -12,7 +12,7 @@ export class LaundryBasketComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.introJs.featureOne();
+    // this.introJs.featureOne();
   }
 
   flipStatus = false; //this flag used to flip the laundry card to detergent 

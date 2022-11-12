@@ -1,17 +1,20 @@
 <div class="container">
-    <div class="card container-size" *ngIf="!flipStatus" style="width:400px" ngClass="animate__animated animate__fadeIn">
-        <div [ngClass]="power?'washer':'washeroff'">
-            <div class="top-line"></div>
-            <div class="light washer-on"></div>
-            <div class="light washer-off"></div>
-            <div class="washer-door">
-              <div class="washer-load"></div>
+    <div class="card container-size" *ngIf="!flipStatus" style="background-color: transparent; border: 0px; width:400px"
+        ngClass="animate__animated animate__fadeIn">
+        <section>
+            <div [ngClass]="power?'washer':'washeroff'">
+                <div class="top-line"></div>
+                <div class="light washer-on"></div>
+                <div class="light washer-off"></div>
+                <div class="washer-door">
+                    <div class="washer-load"></div>
+                </div>
             </div>
-          </div>
+        </section>
         <div class="card-body">
-            <h4 class="card-title">Washing machine status</h4>
-            <p class="card-text">{{statusText}}</p>
-            <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+            <h4 class="card-title d-flex justify-content-center">Washing machine status</h4>
+            <p class="card-text d-flex justify-content-center">{{statusText}}</p>
+            <!-- <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button> -->
         </div>
     </div>
     <div class="card container-size" style="width:400px" *ngIf="flipStatus" ngClass="animate__animated animate__fadeIn">

@@ -7,7 +7,8 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { UserinfoService } from '../helper/userinfo.service';
-import introJs from 'intro.js';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -143,7 +144,7 @@ export class LoginComponent implements OnInit {
       .then((response: any) => {
         console.log(response.user)
         this.userLoginFailed = false;
-        this.router.navigateByUrl("/Home")
+        this.router.navigateByUrl("/Home");
         console.log(response.user.reloadUserInfo.localId);
         localStorage.setItem('SeesionUser', this.userNameLogin)
         this.getUserInfo.getCurrentUserUniqueId(response.user.reloadUserInfo.localId);

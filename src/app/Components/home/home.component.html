@@ -48,10 +48,14 @@
 
 
 
-
+<div class="">
     
   <mat-toolbar class="main header">
-    <div style="margin-left: 20px;letter-spacing: 2px;font-size: 25px;font-weight: 400;color: green;">GoClean</div>
+    <div style="margin-left: 20px;letter-spacing: 2px;font-size: 30px;font-weight: 400;color: white;">GoClean</div>
+    <div class="d-flex align-items-end navbar-content
+    "> <a class="mat-toolbar-button" href  = "Home#section-1" mat-button>Home</a>
+        <a class="mat-toolbar-button"href = "Home#section-2" mat-button>Devices</a>
+        <a class="mat-toolbar-button" href = "Home#section-3" mat-button>Cleaning Cycle</a></div>
     <div style="position: fixed;right: 30px;">
         <mat-icon class="profileIcon">account_circle</mat-icon>
         <mat-icon style="position: absolute;top: 10px;" [matMenuTriggerFor]="menuI">arrow_drop_down</mat-icon>
@@ -66,7 +70,7 @@
       </mat-menu>
     </div>
   </mat-toolbar>
-    
+</div>
 
   <div class = "main main-container">
     <router-outlet></router-outlet>

@@ -66,7 +66,7 @@ export class RecycleBinComponent implements OnInit {
     background : '#f51616'
   }
 
-  public statusText = "Recycle bin is empty";
+  public statusText = "Trash can full. Kindly discard your trash !!";
 
 
 

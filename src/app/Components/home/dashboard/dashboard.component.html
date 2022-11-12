@@ -1,27 +1,31 @@
 <div class="main-container">
-    <section class="one">
-        <div>
-          <h1>Dashboard</h1>
-          <div class="row">
-            <div class="col">
-              <app-laundry-basket></app-laundry-basket>
-            </div>
-            <div class="col">
-              <app-recycle-bin></app-recycle-bin>
-            </div>
-            <div class="col">
-              <app-washing-machine></app-washing-machine>
-            </div>
+  
+    <section id = "section-1" class="one section-1">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="text-change" style="font-size: 70px; color : white ;">{{textSection1}}</h1>
+        </div>
+      </div>
+      
+       
+    </section>
+    <section id = "section-2" class="two" style="color: white;" >
+      <div>
+        <div class="row">
+          <div class="col">
+            <app-laundry-basket></app-laundry-basket>
+          </div>
+          <div class="col">
+            <app-recycle-bin></app-recycle-bin>
+          </div>
+          <div class="col">
+            <app-washing-machine></app-washing-machine>
           </div>
         </div>
+      </div>
+
     </section>
-    <section class="two">
-        <h1>Second Page</h1>
-    </section>
-    <section class="three">
-        <h1>Third Page</h1>
-    </section>
-    <section class="four">
-        <h1>Fourth Page</h1>
+    <section id = "section-3" class="three">
+        <h1>Cleaning Cycle</h1>
     </section>
 </div>

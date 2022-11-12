@@ -30,6 +30,35 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+
+    "body": [
+      {
+        "auth": {
+          "uid": "050fe10c-bf51-405e-a3a9-e167734e1f8c",
+          "token": {
+            "sub": "050fe10c-bf51-405e-a3a9-e167734e1f8c",
+            "firebase": {
+              "sign_in_provider": "google.com"
+            },
+            "email": "",
+            "email_verified": false,
+            "phone_number": "",
+            "name": ""
+          }
+        },
+        "resource": {
+          "key": "value"
+        },
+        "path": "/Customers",
+        "method": "update",
+        "time": "2022-11-11T22:01:15.978Z",
+        "isAdmin": false
+      }
     ]
   }
+  
+
+
 }
+

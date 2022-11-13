@@ -32,6 +32,8 @@
     "angularfire2": "^5.4.2",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.2.2",
+    "devextreme": "22.1.6",
+    "devextreme-angular": "22.1.6",
     "firebase": "^9.12.1",
     "intro.js": "^6.0.0",
     "rxjs": "~7.5.0",

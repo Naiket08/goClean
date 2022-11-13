@@ -48,14 +48,22 @@
 //   }
 
 
-.section-1{
+.section-1 {
     background-color: #60994a;
 }
 
-.text-change{
-    transition-delay: 1000ms ;
+.text-change {
+    transition-delay: 1000ms;
 }
 
-.two{
+.two {
     background-color: #023020;
+}
+
+.three {
+    background-color: #60994a;
+}
+
+::ng-deep #vector-map {
+    height: 500px;
 }

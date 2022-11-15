@@ -3,7 +3,8 @@
     <section id = "section-1" class="one section-1">
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="text-change" style="font-size: 70px; color : white ;">{{textSection1}}</h1>
+          <span class="text-change" style="font-size: 70px; color : white ;">{{textSection1 }}</span>&nbsp;
+          <span class="text-change" style="font-size: 70px; color : white ;" *ngIf="textSection1=='Hello'">{{this.userInformation?.userdetails?.firstname}}</span>
         </div>
       </div>
       
@@ -13,13 +14,13 @@
       <div>
         <div class="row">
           <div class="col">
-            <app-laundry-basket></app-laundry-basket>
+            <app-laundry-basket [userInfo]="userInformation"></app-laundry-basket>
           </div>
           <div class="col">
-            <app-recycle-bin></app-recycle-bin>
+            <app-recycle-bin [userInfo]="userInformation"></app-recycle-bin>
           </div>
           <div class="col">
-            <app-washing-machine></app-washing-machine>
+            <app-washing-machine [userInfo]="userInformation"></app-washing-machine>
           </div>
         </div>
       </div>

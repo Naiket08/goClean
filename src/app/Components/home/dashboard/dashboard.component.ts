@@ -1,9 +1,11 @@
 import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { get } from 'firebase/database';
-import * as userDetails from 'src/app/Store/userInfo/userInfo.action';
 import { UserinfoService } from '../../helper/userinfo.service';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Service, FeatureCollection } from 'src/app/map.service';
+import { GlobalStateInterface } from 'src/app/models/globalState.interface';
+import { Observable } from 'rxjs';
+import { userDetails } from 'src/app/models/userInfo.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,17 +14,18 @@ import { Service, FeatureCollection } from 'src/app/map.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public userInformation: any;
+  public userInformation: userDetails | undefined;
 
   textSection1_2 = "Get Cleaning with GoClean!";
-  textSection1 = "Hello! Rohan";
-
+  textSection1="Hello";
+  userInfo$: Observable<userDetails> | undefined;
   projection: any;
   roomsData: FeatureCollection;
   buildingData: FeatureCollection;
+  // users$: Observable<userDetails>;
 
 
-  constructor(private store: Store, public userdata: UserinfoService, service: Service) {
+  constructor( public userdata: UserinfoService, service: Service) {
     this.setData();
     this.roomsData = service.getRoomsData();
     this.buildingData = service.getBuildingData();
@@ -64,9 +67,10 @@ export class DashboardComponent implements OnInit {
   public setData() {
     const data = this.userdata.currentUserUniqueId;
     if (data) {
-      this.userdata.getUserInfo();
-
+      this.userInfo$ = this.userdata.getUserInfo();
+      this.userInfo$.subscribe((data)=>{
+        this.userInformation = data;
+      })
     }
   }
-  data = this.userdata.currentUserUniqueId;
 }

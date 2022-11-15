@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { IntrojsService } from 'src/app/introjs.service';
+import { GlobalStateInterface } from 'src/app/models/globalState.interface';
+import { userDetails } from 'src/app/models/userInfo.model';
 
 @Component({
   selector: 'app-laundry-basket',
@@ -7,13 +10,18 @@ import { IntrojsService } from 'src/app/introjs.service';
   styleUrls: ['./laundry-basket.component.scss']
 })
 export class LaundryBasketComponent implements OnInit {
+  @Input() public userInfo: userDetails | null | undefined; // decorate the property with @Input()
 
-  constructor(public introJs: IntrojsService) {
+  constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>) {
   }
 
   ngOnInit(): void {
     // this.introJs.featureOne();
   }
+
+  ngOnChanges(change: SimpleChanges): void {
+  }
+
 
   flipStatus = false; //this flag used to flip the laundry card to detergent 
 

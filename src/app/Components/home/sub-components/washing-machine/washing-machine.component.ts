@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { userDetails } from 'src/app/models/userInfo.model';
 
 @Component({
   selector: 'app-washing-machine',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./washing-machine.component.scss']
 })
 export class WashingMachineComponent implements OnInit {
+  @Input() public userInfo: userDetails | null | undefined; // decorate the property with @Input()
+
 
   power:boolean=true;
 

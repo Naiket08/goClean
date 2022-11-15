@@ -14,7 +14,9 @@
         <div class="card-body">
             <h4 class="card-title d-flex justify-content-center">Washing machine status</h4>
             <p class="card-text d-flex justify-content-center">{{statusText}}</p>
-            <!-- <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button> -->
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+            </div>
         </div>
     </div>
     <div class="card container-size" style="width:400px" *ngIf="flipStatus" ngClass="animate__animated animate__fadeIn">

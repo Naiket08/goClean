@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { userDetails } from 'src/app/models/userInfo.model';
 
 @Component({
   selector: 'app-recycle-bin',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recycle-bin.component.scss']
 })
 export class RecycleBinComponent implements OnInit {
+  @Input() public userInfo: userDetails | null | undefined; // decorate the property with @Input()
+
 
   empty:boolean=false;
 

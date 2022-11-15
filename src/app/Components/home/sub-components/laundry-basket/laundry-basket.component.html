@@ -1,15 +1,18 @@
-<div class="container " >
-  <div class="card container-size" *ngIf="!flipStatus" style="width:400px" style="background-color: transparent; border: 0px" ngClass="animate__animated animate__fadeIn">
+<div class="container ">
+  <div class="card container-size" *ngIf="!flipStatus" style="width:400px"
+    style="background-color: transparent; border: 0px" ngClass="animate__animated animate__fadeIn">
     <section>
-    <div class="glass">
-      <div class="wine" [ngStyle]="onPercentageChangeColor()">
+      <div class="glass">
+        <div class="wine" [ngStyle]="onPercentageChangeColor()">
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
     <div class="card-body">
       <h4 class="card-title" id="step1" data-intro="Welcome to your new app!">Laundry Basket Status</h4>
       <p class="card-text">{{statusText}}</p>
-      <!-- <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button> -->
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+      </div>
     </div>
   </div>
   <div class="card container-size" style="width:400px" *ngIf="flipStatus" ngClass="animate__animated animate__fadeIn">

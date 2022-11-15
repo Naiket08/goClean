@@ -1,5 +1,5 @@
 import { Router, RouterModule } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,HostListener} from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { getDatabase, ref, set } from "firebase/database";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -73,10 +73,6 @@ export class LoginComponent implements OnInit {
   //   }
   // }
 
-  ngOnInit(): void {
-
-    // localStorage.setItem('SeesionUser',this.userNameRegister)  
-  }
 
   refresh(): void {
     window.location.reload();
@@ -183,6 +179,24 @@ export class LoginComponent implements OnInit {
 
 
 
+
+  }
+  
+
+
+  public getScreenWidth: any;
+  public getScreenHeight: any;
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+  }
+
+  ngOnInit(): void {
+    // this.introJs.featureOne();
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
 
   }
 

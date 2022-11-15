@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { userDetails } from 'src/app/models/userInfo.model';
 
 @Component({
@@ -9,6 +9,8 @@ import { userDetails } from 'src/app/models/userInfo.model';
 export class WashingMachineComponent implements OnInit {
   @Input() public userInfo: userDetails | null | undefined; // decorate the property with @Input()
 
+
+  colorOfDevice = 'white';
 
   power:boolean=true;
 
@@ -71,6 +73,8 @@ export class WashingMachineComponent implements OnInit {
 
   public statusText = "Washing machine is ON";
 
+  public getScreenWidth: any;
+  public getScreenHeight: any;
 
 
   public onPercentageChangeColor() : any {
@@ -103,9 +107,25 @@ export class WashingMachineComponent implements OnInit {
 
   }
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+  }
 
 
   ngOnInit(): void {
+    // this.introJs.featureOne();
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+
+    if(this.getScreenWidth>720){
+      this.colorOfDevice = 'white';
+    }
+
+    else{
+      this.colorOfDevice = 'black';
+    }
   }
 
 }

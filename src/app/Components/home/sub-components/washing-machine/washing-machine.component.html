@@ -12,23 +12,24 @@
             </div>
         </section>
         <div class="card-body">
-            <h4 class="card-title d-flex justify-content-center">Washing machine status</h4>
-            <p class="card-text d-flex justify-content-center">{{statusText}}</p>
+            <h4 class="card-title d-flex justify-content-center" [ngStyle]="{'color': colorOfDevice }">Washing machine
+                status</h4>
+            <p class="card-text d-flex justify-content-center" [ngStyle]="{'color': colorOfDevice }">{{statusText}}</p>
             <div class="d-flex justify-content-center">
                 <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
             </div>
         </div>
-    </div>
-    <div class="card container-size" style="width:400px" *ngIf="flipStatus" ngClass="animate__animated animate__fadeIn">
-        <div class="card-body">
-            <h4 class="card-title">Detergent to used</h4>
-            <p class="card-text">Please use 2 scoops of Detergent</p>
-            <div class="glass2">
-                <div class="wine">
+        <div class="card container-size" style="width:400px" *ngIf="flipStatus"
+            ngClass="animate__animated animate__fadeIn">
+            <div class="card-body">
+                <h4 class="card-title">Detergent to used</h4>
+                <p class="card-text">Please use 2 scoops of Detergent</p>
+                <div class="glass2">
+                    <div class="wine">
+                    </div>
                 </div>
+                <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Laundry basket</button>
             </div>
-            <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Laundry basket</button>
+
+
         </div>
-
-
-    </div>

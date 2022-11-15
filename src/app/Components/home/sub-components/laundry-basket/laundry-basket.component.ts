@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges,HostListener } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { IntrojsService } from 'src/app/introjs.service';
 import { GlobalStateInterface } from 'src/app/models/globalState.interface';
@@ -15,15 +15,37 @@ export class LaundryBasketComponent implements OnInit {
   constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>) {
   }
 
-  ngOnInit(): void {
-    // this.introJs.featureOne();
+  public getScreenWidth: any;
+  public getScreenHeight: any;
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
   }
 
-  ngOnChanges(change: SimpleChanges): void {
+  ngOnInit(): void {
+    // this.introJs.featureOne();
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+
+    if(this.getScreenWidth>720){
+      this.colorOfDevice = 'white';
+    }
+
+    else{
+      this.colorOfDevice = 'black';
+    }
   }
+
 
 
   flipStatus = false; //this flag used to flip the laundry card to detergent 
+
+ 
+
+  colorOfDevice = 'black';
+
 
 
   onClickChangeToDetergent() {

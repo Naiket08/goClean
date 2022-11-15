@@ -35,6 +35,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './Store/userInfo/userInfo.reducer';
 import { DxVectorMapModule } from 'devextreme-angular';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DxVectorMapModule } from 'devextreme-angular';
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatDialogModule,
     FormsModule,
     DxVectorMapModule,
     MatIconModule,

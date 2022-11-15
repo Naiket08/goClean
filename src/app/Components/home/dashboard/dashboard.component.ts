@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChange, SimpleChanges , HostListener, ElementRef, ViewChild} from '@angular/core';
 import { get } from 'firebase/database';
 import { UserinfoService } from '../../helper/userinfo.service';
 import { select, Store } from '@ngrx/store';
@@ -22,6 +22,8 @@ export class DashboardComponent implements OnInit {
   projection: any;
   roomsData: FeatureCollection;
   buildingData: FeatureCollection;
+  screenWidth = 0;
+
   // users$: Observable<userDetails>;
 
 
@@ -39,6 +41,24 @@ export class DashboardComponent implements OnInit {
     };
   }
 
+
+  public getScreenWidth: any;
+  public getScreenHeight: any;
+   
+  
+
+  openModel() {
+    
+  }
+
+  
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+  }
+
+
   customizeTooltip(arg: { layer: { name: string; }; attribute: (arg0: string) => any; }) {
     if (arg.layer.name === 'rooms') {
       return {
@@ -54,6 +74,8 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.changeTextSection2();
     }, 2000)
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -73,4 +95,60 @@ export class DashboardComponent implements OnInit {
       })
     }
   }
-}
+  data = this.userdata.currentUserUniqueId;
+
+
+  displayStyleLaundry = "none";
+  displayStyleBin = "none";
+  displayStyleWM = "none";
+
+  
+  openPopup( nameOfDevice:String) {
+
+    switch(nameOfDevice){
+      case 'Laundry':
+        this.displayStyleLaundry =  "block";
+        break;
+
+      case 'Bin':
+        this.displayStyleBin = "block";
+        break;
+        
+      case 'WM':
+        this.displayStyleWM = "block";
+        break;
+
+      default:
+        console.log('Somthing really went wrong in open switch');
+        break;
+
+    
+    }
+
+    
+  }
+
+  closePopup(nameOfDevice : String) {
+    
+    switch(nameOfDevice){
+      case 'Laundry':
+        this.displayStyleLaundry =  "none";
+        break;
+
+      case 'Bin':
+        this.displayStyleBin = "none";
+        break;
+        
+      case 'WM':
+        this.displayStyleWM = "none";
+        break;
+      default:
+        console.log('Somthing really went wrong in close switch');
+        break;
+        
+    
+  }
+
+
+
+}}

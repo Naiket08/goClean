@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { userDetails } from 'src/app/models/userInfo.model';
 
 @Component({
@@ -11,6 +11,8 @@ export class RecycleBinComponent implements OnInit {
 
 
   empty:boolean=false;
+
+  colorOfDevice = "black";
 
   constructor() { }
 
@@ -103,9 +105,29 @@ export class RecycleBinComponent implements OnInit {
 
   }
 
+  public getScreenWidth: any;
+  public getScreenHeight: any;
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+  }
 
 
   ngOnInit(): void {
+    // this.introJs.featureOne();
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+
+    if(this.getScreenWidth>720){
+      this.colorOfDevice = 'white';
+    }
+
+    else{
+      this.colorOfDevice = 'black';
+    }
   }
+
 
 }

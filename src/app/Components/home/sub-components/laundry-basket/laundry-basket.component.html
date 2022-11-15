@@ -8,16 +8,16 @@
       </div>
     </section>
     <div class="card-body">
-      <h4 class="card-title" id="step1" data-intro="Welcome to your new app!">Laundry Basket Status</h4>
-      <p class="card-text">{{statusText}}</p>
+      <h4 class="card-title" id="step1" data-intro="Welcome to your new app!"  [ngStyle]="{'color': colorOfDevice }">Laundry Basket Status</h4>
+      <p class="card-text" [ngStyle]="{'color': colorOfDevice }">{{statusText}}</p>
       <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
       </div>
     </div>
   </div>
-  <div class="card container-size" style="width:400px" *ngIf="flipStatus" ngClass="animate__animated animate__fadeIn">
-    <div class="card-body">
-      <h4 class="card-title">Detergent to used</h4>
+  <div class="card container-size" style="width:400px" [ngStyle]="{'color': colorOfDevice }" *ngIf="flipStatus" ngClass="animate__animated animate__fadeIn">
+    <div class="card-body" style="color: black;">
+      <h4 class="card-title" style="color: black;">Detergent to used</h4>
       <p class="card-text">Please use 2 scoops of Detergent</p>
       <div class="glass2">
         <div class="wine">

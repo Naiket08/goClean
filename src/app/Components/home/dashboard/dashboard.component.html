@@ -6,7 +6,7 @@
       <div class="container">
         <span class="text-change" style="font-size: 70px; color : white ;">{{textSection1 }}</span>&nbsp;
         <span class="text-change" style="font-size: 70px; color : white ;"
-          *ngIf="textSection1=='Hello'">{{this.userInformation?.userdetails?.firstname}}</span>
+          *ngIf="textSection1=='Hello'">{{this.userInformation!.userdetails.firstname}}</span>
       </div>
     </div>
   </section>
@@ -16,7 +16,7 @@
     <div>
       <div class="row" *ngIf="getScreenWidth>720">
         <div class="col">
-          <app-laundry-basket [userInfo]="userInformation"></app-laundry-basket>
+          <app-laundry-basket [userInfo]="userState$ | async"></app-laundry-basket>
         </div>
         <div class="col">
           <app-recycle-bin [userInfo]="userInformation"></app-recycle-bin>

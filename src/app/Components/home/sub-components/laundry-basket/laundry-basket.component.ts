@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, SimpleChanges,HostListener } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/compiler';
+import { Component, Input, OnInit, SimpleChanges,HostListener, SimpleChange } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { IntrojsService } from 'src/app/introjs.service';
 import { GlobalStateInterface } from 'src/app/models/globalState.interface';
 import { userDetails } from 'src/app/models/userInfo.model';
+import { UserInfoState } from 'src/app/Store/userInfo/userInfo.state';
 
 @Component({
   selector: 'app-laundry-basket',
@@ -10,7 +12,7 @@ import { userDetails } from 'src/app/models/userInfo.model';
   styleUrls: ['./laundry-basket.component.scss']
 })
 export class LaundryBasketComponent implements OnInit {
-  @Input() public userInfo: userDetails | null | undefined; // decorate the property with @Input()
+  @Input() public userInfo: any; // decorate the property with @Input()
 
   constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>) {
   }
@@ -22,6 +24,12 @@ export class LaundryBasketComponent implements OnInit {
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
+  }
+
+  ngOnChanges(change: SimpleChanges){
+    if(change.userInfo && this.userInfo){
+      this.laundryStatus= this.userInfo.users!.devices.laundryBasketStatus;
+    }
   }
 
   ngOnInit(): void {
@@ -106,7 +114,6 @@ export class LaundryBasketComponent implements OnInit {
 
 
   public onPercentageChangeColor(): any {
-    this.laundryStatus= this.userInfo?.devices.laundryBasketStatus;
     switch (this.laundryStatus) {
       case 20:
         this.statusText = "Laundry Basket is just 20% keep going";

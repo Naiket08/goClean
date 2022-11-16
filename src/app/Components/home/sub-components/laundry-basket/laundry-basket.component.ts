@@ -26,6 +26,7 @@ export class LaundryBasketComponent implements OnInit {
 
   ngOnInit(): void {
     // this.introJs.featureOne();
+    console.log(this.userInfo);
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
 

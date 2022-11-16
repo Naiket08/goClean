@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   roomsData: FeatureCollection;
   buildingData: FeatureCollection;
   screenWidth = 0;
-  userState$: Observable<userDetails> | undefined;
+  userState$: Observable<userDetails | undefined> | undefined;
 
   // users$: Observable<userDetails>;
 
@@ -97,13 +97,13 @@ export class DashboardComponent implements OnInit {
     const data = this.userdata.currentUserUniqueId ? this.userdata.currentUserUniqueId : localStorage.getItem('UserID');
     if (data) {
       this.userInfo$ = this.userdata.getUserInfo();
-      this.userInfo$.subscribe((data) => {
-        this.userInformation = data;
-      })
+      // this.userInfo$.subscribe((data) => {
+      //   this.userInformation = data;
+      // })
     }
     this.userState$ = this.store.pipe(select(userSelector));
-    this.userState$.subscribe((state) => {
-      console.log(state);
+    this.userState$.subscribe((state:any) => {
+      this.userInformation= state.users;
     })
   }
   data = this.userdata.currentUserUniqueId;

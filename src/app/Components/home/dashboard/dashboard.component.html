@@ -1,152 +1,133 @@
 <div class="main-container">
-  
-    <section id = "section-1" class="one section-1">
-      <h1></h1>
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <span class="text-change" style="font-size: 70px; color : white ;">{{textSection1 }}</span>&nbsp;
-          <span class="text-change" style="font-size: 70px; color : white ;" *ngIf="textSection1=='Hello'">{{this.userInformation?.userdetails?.firstname}}</span>
+
+  <section id="section-1" class="one section-1">
+    <!-- <div *ngIf="userState$ | async">userdata is coming</div> -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <span class="text-change" style="font-size: 70px; color : white ;">{{textSection1 }}</span>&nbsp;
+        <span class="text-change" style="font-size: 70px; color : white ;"
+          *ngIf="textSection1=='Hello'">{{this.userInformation?.userdetails?.firstname}}</span>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="section-2" class="two" style="color: white; ">
+    <div>
+      <div class="row" *ngIf="getScreenWidth>720">
+        <div class="col">
+          <app-laundry-basket [userInfo]="userInformation"></app-laundry-basket>
+        </div>
+        <div class="col">
+          <app-recycle-bin [userInfo]="userInformation"></app-recycle-bin>
+        </div>
+        <div class="col">
+          <app-washing-machine [userInfo]="userInformation"></app-washing-machine>
         </div>
       </div>
-    </section>
-
-
-    <section  id = "section-2" class="two" style="color: white; " >
-      <div>
-        <div class="row" *ngIf = "getScreenWidth>720">
-          <div class="col">
-            <app-laundry-basket [userInfo]="userInformation"></app-laundry-basket>
-          </div>
-          <div class="col">
-            <app-recycle-bin [userInfo]="userInformation"></app-recycle-bin>
-          </div>
-          <div class="col">
-            <app-washing-machine [userInfo]="userInformation"></app-washing-machine>
-          </div>
-        </div>
-        <div class="container fluid" *ngIf = "getScreenWidth<720" [style.height] = " getScreenHeight%20" >
-        <div class = "row" >
+      <div class="container fluid" *ngIf="getScreenWidth<720" [style.height]=" getScreenHeight%20">
+        <div class="row">
 
 
           <div class="card device-card">
             <div class="card-body">
-              <h5 class="card-title">Laundry Basket <button type="button"(click)="openPopup('Laundry')"  class="btn btn-info">Info</button></h5>
+              <h5 class="card-title">Laundry Basket <button type="button" (click)="openPopup('Laundry')"
+                  class="btn btn-info">Info</button></h5>
               <div class="progress" style="width: 100%;">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25"
+                  aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-            <div
-              class="modal"
-              tabindex="-1"
-              role="dialog"
-              [ngStyle]="{'display':displayStyleLaundry}">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <app-laundry-basket></app-laundry-basket>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" 
-                            (click)="closePopup('Laundry')">
-                      Close
-                    </button>
+              <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyleLaundry}">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <app-laundry-basket></app-laundry-basket>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" (click)="closePopup('Laundry')">
+                        Close
+                      </button>
+                    </div>
                   </div>
+
                 </div>
 
-            </div>
-              
-            </div>
+              </div>
             </div>
           </div>
 
           <div class="card device-card">
             <div class="card-body">
-              <h5 class="card-title">Recycle-Bin <button type="button"(click)="openPopup('Bin')"  class="btn btn-info">Info</button></h5>
+              <h5 class="card-title">Recycle-Bin <button type="button" (click)="openPopup('Bin')"
+                  class="btn btn-info">Info</button></h5>
               <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%"
+                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-            <div
-              class="modal"
-              tabindex="-1"
-              role="dialog"
-              [ngStyle]="{'display':displayStyleBin}">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <app-recycle-bin></app-recycle-bin>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" 
-                            (click)="closePopup('Bin')">
-                      Close
-                    </button>
+              <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyleBin}">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <app-recycle-bin></app-recycle-bin>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" (click)="closePopup('Bin')">
+                        Close
+                      </button>
+                    </div>
                   </div>
+
                 </div>
 
-            </div>
-
-            </div>
+              </div>
             </div>
           </div>
 
           <div class="card device-card">
             <div class="card-body">
-              <h5 class="card-title">Washing Machine <button type="button"(click)="openPopup('WM')"  class="btn btn-info">Info</button></h5>
-            <div
-              class="modal"
-              tabindex="-1"
-              role="dialog"
-              [ngStyle]="{'display':displayStyleWM}">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <app-washing-machine></app-washing-machine>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" 
-                            (click)="closePopup('WM')">
-                      Close
-                    </button>
+              <h5 class="card-title">Washing Machine <button type="button" (click)="openPopup('WM')"
+                  class="btn btn-info">Info</button></h5>
+              <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyleWM}">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <app-washing-machine></app-washing-machine>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" (click)="closePopup('WM')">
+                        Close
+                      </button>
+                    </div>
                   </div>
+
                 </div>
 
-            </div>
-              
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>>
-            </div>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>>
+              </div>
             </div>
           </div>
 
 
 
 
-          
 
 
- 
+
+
 
         </div>
 
-        
-      </div>
-      </div>
-    </section>
 
-    
-    
-    <section id = "section-3" class="three">
-        <!-- <h1>Cleaning Cycle</h1> -->
-        <dx-vector-map id="vector-map" [projection]="projection">
-          <dxo-tooltip
-            [enabled]="true"
-            [customizeTooltip]="customizeTooltip"
-          ></dxo-tooltip>
-          <dxi-layer
-            [hoverEnabled]="false"
-            [dataSource]="buildingData"
-            name="building"
-          ></dxi-layer>
-          <dxi-layer
-            color="transparent"
-            [dataSource]="roomsData"
-            name="rooms"
-            [borderWidth]="1"
-          >
-            <dxo-label [enabled]="true" dataField="name"></dxo-label>
-          </dxi-layer>
-        </dx-vector-map>
-    </section>
+      </div>
+    </div>
+  </section>
+
+  <section id="section-3" class="three">
+    <!-- <h1>Cleaning Cycle</h1> -->
+    <div class="d-flex justify-content-center position-relative clean-cycle">Give us your preferences for <button mat-button type="button" (click)="openForm()">cleaning cycle</button> to initialise
+      your cleaning map </div>
+    <div class="map-view d-flex justify-content-center position-relative">
+      <dx-vector-map id="vector-map" [projection]="projection">
+        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+        <dxi-layer [hoverEnabled]="false" [dataSource]="buildingData" name="building"></dxi-layer>
+        <dxi-layer color="transparent" [dataSource]="roomsData" name="rooms" [borderWidth]="1">
+          <dxo-label [enabled]="true" dataField="name"></dxo-label>
+        </dxi-layer>
+      </dx-vector-map>
+    </div>
+  </section>
 </div>

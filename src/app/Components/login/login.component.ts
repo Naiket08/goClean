@@ -1,5 +1,5 @@
 import { Router, RouterModule } from '@angular/router';
-import { Component, OnInit ,HostListener} from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { getDatabase, ref, set } from "firebase/database";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -82,19 +82,19 @@ export class LoginComponent implements OnInit {
 
   addUserToDb(userID: any, username: any) { // adds users to Real time Data base in firebase
     const db = getDatabase();
-  set(ref(db, 'Customers/' + userID), {
-    userdetails: {
-      firstname: this.firstName,
-      lastname : this.lastName,
-      emailId : username,
-      PhoneNumber: this.mobileNumber,
-      isNewUser: true
-    },
-    devices : {
-      laundryBasketStatus: 30,
-      DustbinStatus: true,
-      ventStatus: 'clean'
-    }
+    set(ref(db, 'Customers/' + userID), {
+      userdetails: {
+        firstname: this.firstName,
+        lastname: this.lastName,
+        emailId: username,
+        PhoneNumber: this.mobileNumber,
+        isNewUser: true
+      },
+      devices: {
+        laundryBasketStatus: 30,
+        DustbinStatus: true,
+        ventStatus: 'clean'
+      }
 
     });
 
@@ -112,16 +112,16 @@ export class LoginComponent implements OnInit {
 
         this.addUserToDb(response.user.reloadUserInfo.localId, this.userNameRegister);
 
-      setTimeout(() => {
-        console.log("Delayed for 2 second.");
-        this.refresh();
+        setTimeout(() => {
+          console.log("Delayed for 2 second.");
+          this.refresh();
 
-      }, 4000)
-    
-    })
-    .catch((err) =>{
-      console.log(err.message);
-      this.userCreatedFailed = !this.userCreatedFailed;
+        }, 4000)
+
+      })
+      .catch((err) => {
+        console.log(err.message);
+        this.userCreatedFailed = !this.userCreatedFailed;
 
         // }, 4000)
 
@@ -143,8 +143,8 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/Home");
         console.log(response.user.reloadUserInfo.localId);
         localStorage.setItem('SeesionUser', this.userNameLogin)
-        this.getUserInfo.getCurrentUserUniqueId(response.user.reloadUserInfo.localId);
-
+        const uID = this.getUserInfo.getCurrentUserUniqueId(response.user.reloadUserInfo.localId);
+        localStorage.setItem('UserID', uID);
       })
       .catch((err) => {
         console.log(err)
@@ -168,10 +168,11 @@ export class LoginComponent implements OnInit {
         console.log('google signin success');
         console.log(response.user.uid);
 
-        localStorage.setItem('SeesionUser', this.userNameLogin);
+        localStorage.setItem('UserID', response.user.uid);
         this.router.navigateByUrl("/Home");
         console.log(response);
-        this.getUserInfo.getCurrentUserUniqueId(response.user.uid);
+        const uID = localStorage.getItem('UserID');
+        this.getUserInfo.getCurrentUserUniqueId(uID);
 
       }).catch((err) => {
         console.log('google signin failed');
@@ -181,7 +182,7 @@ export class LoginComponent implements OnInit {
 
 
   }
-  
+
 
 
   public getScreenWidth: any;

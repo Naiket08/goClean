@@ -36,6 +36,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './Store/userInfo/userInfo.reducer';
 import { DxVectorMapModule } from 'devextreme-angular';
 import {MatDialogModule} from '@angular/material/dialog';
+import { CleaningCycleComponent } from './Components/home/sub-components/cleaning-cycle/cleaning-cycle.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     DashboardComponent,
     LaundryBasketComponent,
     RecycleBinComponent,
-    WashingMachineComponent
+    WashingMachineComponent,
+    CleaningCycleComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,7 @@ import {MatDialogModule} from '@angular/material/dialog';
   providers: [
     AuthguardServiceService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DashboardComponent]
 })
 export class AppModule { }

@@ -66,7 +66,7 @@ export class LaundryBasketComponent implements OnInit {
 
   };
 
-  public laundeyStatus = 60;
+  public laundryStatus: number | undefined;
 
 
 
@@ -105,8 +105,8 @@ export class LaundryBasketComponent implements OnInit {
 
 
   public onPercentageChangeColor(): any {
-
-    switch (this.laundeyStatus) {
+    this.laundryStatus= this.userInfo?.devices.laundryBasketStatus;
+    switch (this.laundryStatus) {
       case 20:
         this.statusText = "Laundry Basket is just 20% keep going";
         return (this.a20);

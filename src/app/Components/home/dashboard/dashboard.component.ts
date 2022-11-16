@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChange, SimpleChanges , HostListener, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, SimpleChange, SimpleChanges, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { get } from 'firebase/database';
 import { UserinfoService } from '../../helper/userinfo.service';
 import { select, Store } from '@ngrx/store';
@@ -6,6 +6,10 @@ import { Service, FeatureCollection } from 'src/app/map.service';
 import { GlobalStateInterface } from 'src/app/models/globalState.interface';
 import { Observable } from 'rxjs';
 import { userDetails } from 'src/app/models/userInfo.model';
+import { userSelector } from 'src/app/Store/userInfo/userInfo.selector';
+import { UserInfoState } from 'src/app/Store/userInfo/userInfo.state';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CleaningCycleComponent } from '../sub-components/cleaning-cycle/cleaning-cycle.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,17 +21,19 @@ export class DashboardComponent implements OnInit {
   public userInformation: userDetails | undefined;
 
   textSection1_2 = "Get Cleaning with GoClean!";
-  textSection1="Hello";
+  textSection1 = "Hello";
   userInfo$: Observable<userDetails> | undefined;
   projection: any;
   roomsData: FeatureCollection;
   buildingData: FeatureCollection;
   screenWidth = 0;
+  userState$: Observable<userDetails> | undefined;
 
   // users$: Observable<userDetails>;
 
 
-  constructor( public userdata: UserinfoService, service: Service) {
+  constructor(public userdata: UserinfoService, service: Service, private store: Store<UserInfoState>, private dialog: MatDialog) {
+    ;
     this.setData();
     this.roomsData = service.getRoomsData();
     this.buildingData = service.getBuildingData();
@@ -44,14 +50,14 @@ export class DashboardComponent implements OnInit {
 
   public getScreenWidth: any;
   public getScreenHeight: any;
-   
-  
+
+
 
   openModel() {
-    
+
   }
 
-  
+
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
@@ -65,7 +71,7 @@ export class DashboardComponent implements OnInit {
         text: `Square: ${arg.attribute('square')} ft&#178`,
       };
     }
-    else{
+    else {
       return;
     }
   }
@@ -87,13 +93,18 @@ export class DashboardComponent implements OnInit {
   }
 
   public setData() {
-    const data = this.userdata.currentUserUniqueId;
+    ;
+    const data = this.userdata.currentUserUniqueId ? this.userdata.currentUserUniqueId : localStorage.getItem('UserID');
     if (data) {
       this.userInfo$ = this.userdata.getUserInfo();
-      this.userInfo$.subscribe((data)=>{
+      this.userInfo$.subscribe((data) => {
         this.userInformation = data;
       })
     }
+    this.userState$ = this.store.pipe(select(userSelector));
+    this.userState$.subscribe((state) => {
+      console.log(state);
+    })
   }
   data = this.userdata.currentUserUniqueId;
 
@@ -102,18 +113,18 @@ export class DashboardComponent implements OnInit {
   displayStyleBin = "none";
   displayStyleWM = "none";
 
-  
-  openPopup( nameOfDevice:String) {
 
-    switch(nameOfDevice){
+  openPopup(nameOfDevice: String) {
+
+    switch (nameOfDevice) {
       case 'Laundry':
-        this.displayStyleLaundry =  "block";
+        this.displayStyleLaundry = "block";
         break;
 
       case 'Bin':
         this.displayStyleBin = "block";
         break;
-        
+
       case 'WM':
         this.displayStyleWM = "block";
         break;
@@ -122,33 +133,48 @@ export class DashboardComponent implements OnInit {
         console.log('Somthing really went wrong in open switch');
         break;
 
-    
+
     }
 
-    
+
   }
 
-  closePopup(nameOfDevice : String) {
-    
-    switch(nameOfDevice){
+  closePopup(nameOfDevice: String) {
+
+    switch (nameOfDevice) {
       case 'Laundry':
-        this.displayStyleLaundry =  "none";
+        this.displayStyleLaundry = "none";
         break;
 
       case 'Bin':
         this.displayStyleBin = "none";
         break;
-        
+
       case 'WM':
         this.displayStyleWM = "none";
         break;
       default:
         console.log('Somthing really went wrong in close switch');
         break;
-        
-    
+
+
+    }
+
+
+
+
+
   }
+  openForm() {
+    const dialogConfig = new MatDialogConfig();
 
+    // dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      title: 'Angular For Beginners'
+  };
 
-
-}}
+    this.dialog.open(CleaningCycleComponent, dialogConfig);
+  }
+}

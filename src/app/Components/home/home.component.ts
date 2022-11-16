@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
 
   logout(){
     localStorage.setItem('SeesionUser','');
+    localStorage.setItem('UserID','');
+
     this.route.navigateByUrl('/login') 
     this.userervicedata.getCurrentUserUniqueId("");
   }

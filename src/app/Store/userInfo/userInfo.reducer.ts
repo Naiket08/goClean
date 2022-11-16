@@ -20,13 +20,15 @@ export const initialState: UserInfoState = {
             ventStatus: ''
         }
     },
-    error: null
+    error: null,
+    uId:""
 
 };
 
 export const reducers = createReducer(
     initialState,
     on(UserActions.postLoading, (state) => ({ ...state, isLoading: true })),
+    on(UserActions.postUid, (state,action) => ({ ...state, uId: action.uId })),
     on(UserActions.postUsers, (state, action) => ({ ...state, isLoading: false, users: action.users  })),
 
     // on(UserActions.getPostsSuccess, (state, action) => ({

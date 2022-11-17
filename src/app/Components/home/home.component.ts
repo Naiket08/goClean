@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild ,HostListener} from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { UserinfoService } from '../helper/userinfo.service'; 
@@ -14,9 +14,7 @@ export class HomeComponent implements OnInit {
   public drawer!: MatDrawer;
   constructor(private route:Router, public userervicedata : UserinfoService) { }
 
-  ngOnInit(): void {
 
-  }
 
   public isCollapsed = true;
 
@@ -32,5 +30,22 @@ export class HomeComponent implements OnInit {
     this.route.navigateByUrl('/login') 
     this.userervicedata.getCurrentUserUniqueId("");
   }
+
+  public getScreenWidth: any;
+  public getScreenHeight: any;
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+  }
+
+  ngOnInit(): void {
+    // this.introJs.featureOne();
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+
+  }
+
 
 }

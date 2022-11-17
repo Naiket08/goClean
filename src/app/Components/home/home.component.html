@@ -52,7 +52,7 @@
     
   <mat-toolbar class="main header">
     <div style="margin-left: 20px;letter-spacing: 2px;font-size: 30px;font-weight: 400;color: white;">GoClean</div>
-    <div class="d-flex align-items-end navbar-content
+    <div *ngIf="getScreenWidth>730" class="d-flex align-items-end navbar-content
     "> <a class="mat-toolbar-button" href  = "Home#section-1" mat-button>Home</a>
         <a class="mat-toolbar-button"href = "Home#section-2" mat-button>Devices</a>
         <a class="mat-toolbar-button" href = "Home#section-3" mat-button>Cleaning Cycle</a></div>

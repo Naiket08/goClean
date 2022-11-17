@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
         isNewUser: true
       },
       devices: {
-        laundryBasketStatus: 30,
+        laundryBasketStatus: 20,
         DustbinStatus: true,
         ventStatus: 'clean'
       }

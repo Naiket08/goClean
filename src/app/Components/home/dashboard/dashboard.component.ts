@@ -177,4 +177,21 @@ export class DashboardComponent implements OnInit {
 
     this.dialog.open(CleaningCycleComponent, dialogConfig);
   }
+
+
+  flipDevices = false;
+  
+  onFlipDevice1(){
+    this.flipDevices = false;
+  }
+
+  onFlipDevice2(){
+    this.flipDevices = true;
+  }
+
+
+
+
+
+
 }

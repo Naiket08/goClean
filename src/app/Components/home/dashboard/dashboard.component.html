@@ -14,7 +14,9 @@
 
   <section id="section-2" class="two" style="color: white; ">
     <div>
-      <div class="row" *ngIf="getScreenWidth>720">
+
+      <div>
+      <div class="row" *ngIf="getScreenWidth>720 && !flipDevices ">
         <div class="col">
           <app-laundry-basket [userInfo]="userState$ | async"></app-laundry-basket>
         </div>
@@ -25,22 +27,51 @@
           <app-washing-machine [userInfo]="userInformation"></app-washing-machine>
         </div>
       </div>
+
+      <div class="row" *ngIf="getScreenWidth>720  && flipDevices ">
+        <div class="col">
+          <app-airvent [userInfo]="userState$ | async"></app-airvent>
+        </div>
+        <div class="col">
+          <app-recycle-bin [userInfo]="userInformation"></app-recycle-bin>
+        </div>
+      </div>
+      <div *ngIf="getScreenWidth>720" class="d-flex justify-content-center">
+      <button type="button" class="btn btn-primary" (click)="onFlipDevice1()"> 1 </button>
+      <button type="button" class="btn btn-primary" (click)="onFlipDevice2()"> 2 </button>
+    </div>
+    </div>
+
+
       <div class="container fluid" *ngIf="getScreenWidth<720" [style.height]=" getScreenHeight%20">
         <div class="row">
 
+          
 
           <div class="card device-card">
             <div class="card-body">
-              <h5 class="card-title">Laundry Basket <button type="button" (click)="openPopup('Laundry')"
-                  class="btn btn-info">Info</button></h5>
-              <div class="progress" style="width: 100%;">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25"
-                  aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
+              <h5 class="card-title">Laundry Basket ({{this.userInformation?.devices?.laundryBasketStatus}}) %  <button type="button" (click)="openPopup('Laundry')"
+                class="info" >?</button></h5>
+              
+                  <div class="progress" *ngIf = "this.userInformation?.devices?.laundryBasketStatus == 20">
+                    <div class="progress-bar bg-success bg-gradient"  role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" *ngIf = "this.userInformation?.devices?.laundryBasketStatus == 40">
+                    <div class="progress-bar bg-success bg-gradient"  role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" *ngIf = "this.userInformation?.devices?.laundryBasketStatus == 60">
+                    <div class="progress-bar bg-warning bg-gradient" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" *ngIf = "this.userInformation?.devices?.laundryBasketStatus == 80">
+                    <div class="progress-bar bg-danger bg-gradient" role="progressbar" style="width: 80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" *ngIf = "this.userInformation?.devices?.laundryBasketStatus == 100">
+                    <div class="progress-bar bg-danger bg-gradient" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
               <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyleLaundry}">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
-                    <app-laundry-basket></app-laundry-basket>
+                    <app-laundry-basket [userInfo]="userState$ | async"></app-laundry-basket>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" (click)="closePopup('Laundry')">
                         Close
@@ -58,10 +89,12 @@
             <div class="card-body">
               <h5 class="card-title">Recycle-Bin <button type="button" (click)="openPopup('Bin')"
                   class="btn btn-info">Info</button></h5>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%"
-                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
+                  <div class="progress" *ngIf = "this.userInformation?.devices?.DustbinStatus == false">
+                    <div class="progress-bar bg-success bg-gradient"  role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="progress" *ngIf = "this.userInformation?.devices?.DustbinStatus ==true">
+                    <div class="progress-bar bg-danger bg-gradient"  role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
               <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyleBin}">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">

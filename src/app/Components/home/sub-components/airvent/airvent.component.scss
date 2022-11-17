@@ -1,0 +1,113 @@
+svg {
+    max-width: 100%;
+}
+
+.btn {
+    color: inherit;
+    font: inherit;
+    margin: 1em;
+    text-transform: none;
+    overflow: visible;
+    outline: 0;
+    vertical-align: top;
+    font-size: 16px;
+    line-height: 1.3;
+    box-sizing: inherit;
+    display: inline-block;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+//   .btn-menu {
+//     display: inline-block;
+//     text-decoration: none;
+//     text-align: center;
+//     position: relative;
+//     width: 42px;
+//     height: 42px;
+//     /* overflow: hidden; */
+//   }
+
+//   .btn-menu:after {
+//     content: "";
+//     position: absolute;
+//     top: -1px;
+//     right: 0;
+//     bottom: 0;
+//     left: -1px;
+//     width: 72px;
+//     height: 72px;
+//     background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57 70'%3E%3Cg%3E%3Cpath opacity='0.4' fill='rgb(32, 39, 70)' d='M40.5,3c-0.035-0.243-0.229-0.729-0.5-1s-0.727-0.443-1-0.5C35.554,0.783,21.995-0.008,21,0 C19.98,0.009,6.462,0.538,3,1.5C2.848,1.542,2.271,1.729,2,2S1.521,2.899,1.5,3C0.788,6.4,0.001,20.005,0,21 c-0.001,1.021,0.35,15.384,1.3,18c0.153,0.422,0.534,0.867,0.7,1c0.133,0.117,0.727,0.419,1,0.5c2.733,0.816,16.98,1.494,18,1.5 c1.008,0.006,14.75-0.688,18-1.5c0.272-0.068,0.729-0.229,1-0.5s0.474-0.822,0.5-1C41,35.601,42,22.008,42,21S41,6.425,40.5,3z M30,28H12v-2h18V28z M30,22H12v-2h18V22z M30,16H12v-2h18V16z'/%3E%3C/g%3E%3C/svg%3E") 0 0 no-repeat;
+//   }
+
+//   .btn-menu:hover {
+//     cursor: pointer;
+//   }
+
+.shape-airvent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 375px;
+    height: 375px;
+    animation: spin 1s infinite linear forwards;
+}
+
+//   .btn-menu:hover .shape-airvent {
+//     animation-duration: .4s;
+//   }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.btn {
+    color: inherit;
+    font: inherit;
+    margin: 1em;
+    text-transform: none;
+    overflow: visible;
+    outline: 0;
+    vertical-align: top;
+    font-size: 16px;
+    line-height: 1.3;
+    box-sizing: inherit;
+}
+
+.btn-menu {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    width: 375px;
+    height: 375px;
+}
+
+.btn-menu:hover {
+    cursor: pointer;
+}
+
+.shape-airvent {
+    position: initial !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 375px;
+    height: 375px;
+    animation-duration: 0.8s;
+}
+
+.animate-stop  {
+    @extend .shape-airvent;
+    animation-duration: 0s;
+}

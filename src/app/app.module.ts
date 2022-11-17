@@ -37,6 +37,7 @@ import { reducers } from './Store/userInfo/userInfo.reducer';
 import { DxVectorMapModule } from 'devextreme-angular';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CleaningCycleComponent } from './Components/home/sub-components/cleaning-cycle/cleaning-cycle.component';
+import { AirventComponent } from './Components/home/sub-components/airvent/airvent.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CleaningCycleComponent } from './Components/home/sub-components/cleanin
     LaundryBasketComponent,
     RecycleBinComponent,
     WashingMachineComponent,
-    CleaningCycleComponent
+    CleaningCycleComponent,
+    AirventComponent
   ],
   imports: [
     BrowserModule,

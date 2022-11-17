@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="card container-size" *ngIf="!flipStatus" style="background-color: transparent; border: 0px; width:400px"
+        ngClass="animate__animated animate__fadeIn">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 42 42" style="display: none">
+                <symbol class="d-flex justify-content-center" id="AirventIcon" viewport="0 0 42 42" width="42"
+                    height="42">
+                    <g id="bg">
+                        <circle fill="#ffffff" cx="21" cy="21" r="17" />
+                    </g>
+                    <g id="fan">
+                        <path fill="#c2c5d6"
+                            d="M34.09,19.289c-2.55-1.46-5.265-0.164-7.939-0.539c-3.75-0.425-3.925-3.175-3.96-3.698 c-0.122-1.825,0.716-3.534,1.51-4.477C25.825,8.05,29.25,8.15,28.301,7c-0.544-0.658-3.75-2-7.3-2c-2.4,0-7.914,1.8-8,5.5 c-0.05,2.15,1.3,3.6,3.15,6.5c1.794,2.813,0.845,6.527-4,6.9c-4.55,0.35-6.136-3.886-6.926-2.25 c-0.371,0.769,0.136,4.248,1.905,7.325c1.196,2.081,5.471,6.058,8.755,4.194c3.832-2.175,3.915-11.536,10.416-7.72 c2.393,1.405,3.133,4.584,2.633,8.05c-0.007,0.047,0,0.867,0.574,0.801c0.848-0.098,3.602-2.257,5.369-5.335 C36.071,26.884,37.25,21.101,34.09,19.289z" />
+                        <!-- <animateTransform id="symbolAirventRotate" attributeName="transform" type="rotate" from="0 21 21" to="360 21 21" begin="0s" dur="2s" repeatCount="indefinite" /> -->
+                    </g>
+                    <g id="middot">
+                        <circle fill="#dcdaed" cx="21" cy="21" r="4" />
+                    </g>
+                </symbol>
+            </svg>
+        
+
+
+        <svg class="shape-airvent" viewBox="0 0 42 42" width="0" height="0" fill="transparent">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#AirventIcon"></use>
+        </svg>
+
+
+        <div class="card-body">
+            <h4 class="card-title d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}">Recycle Bin
+                Status</h4>
+            <p class="card-text d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}">{{statusText}}</p>
+            <div class="d-flex justify-content-center">
+                <button type="button " class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+            </div>
+        </div>
+    </div>
+    <div class="card container-size" style="width:400px" *ngIf="flipStatus" ngClass="animate__animated animate__fadeIn">
+        <div class="card-body">
+            <h4 class="card-title">Detergent to used</h4>
+            <p class="card-text">Please use 2 scoops of Detergent</p>
+            <div class="glass2">
+                <div class="wine">
+                </div>
+            </div>
+            <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Laundry basket</button>
+        </div>
+
+
+    </div>

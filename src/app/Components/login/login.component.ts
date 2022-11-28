@@ -91,15 +91,18 @@ export class LoginComponent implements OnInit {
         isNewUser: true
       },
       devices: {
-        laundryBasketStatus: 20,
-        DustbinStatus: true,
-        ventStatus: 'clean'
+        laundryBasketStatus: 0,
+        DustbinStatus: false,
+        ventStatus: false,
+        washingMachineStatus: false
       }
 
     });
 
 
   }
+
+
 
   onSubmitHandleRegister() {
 
@@ -160,6 +163,31 @@ export class LoginComponent implements OnInit {
 
   }
 
+
+
+  addGoogleUserToDb(userID: any, firstName:any, emailID:any) { // adds Google users to Real time Data base in firebase
+    const db = getDatabase();
+    set(ref(db, 'Customers/' + userID), {
+      userdetails: {
+        firstname:firstName,
+        lastname: "NA",
+        emailId: emailID,
+        PhoneNumber: 0,
+        isNewUser: true
+      },
+      devices: {
+        laundryBasketStatus: 0,
+        DustbinStatus: false,
+        ventStatus: false,
+        washingMachineStatus: false
+      }
+
+    }); 
+
+
+  }
+
+
   onGoogleSignIn() {
 
 
@@ -167,12 +195,15 @@ export class LoginComponent implements OnInit {
       .then((response: any) => {
         console.log('google signin success');
         console.log(response.user.uid);
-
         localStorage.setItem('UserID', response.user.uid);
-        this.router.navigateByUrl("/Home");
-        console.log(response);
         const uID = localStorage.getItem('UserID');
         this.getUserInfo.getCurrentUserUniqueId(uID);
+        console.log(response);
+        this.addGoogleUserToDb(response.user.uid,response.user.displayName,response.user.email) 
+        this.router.navigateByUrl("/Home");
+        
+
+        
 
       }).catch((err) => {
         console.log('google signin failed');

@@ -16,7 +16,8 @@ users: {
     devices: {
         laundryBasketStatus: 0,
         DustbinStatus: false,
-        ventStatus: ''
+        ventStatus: false,
+        washingMachineStatus: false
     }
 }
 

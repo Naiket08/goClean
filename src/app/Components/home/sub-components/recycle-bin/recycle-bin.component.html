@@ -9,9 +9,10 @@
         </section>
         <div class="card-body">
             <h4 class="card-title d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}" >Recycle Bin Status</h4>
-            <p class="card-text d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}" >{{statusText}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "empty" [ngStyle]="{ 'color' : colorOfDevice}" >{{statusTextON}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "!empty" [ngStyle]="{ 'color' : colorOfDevice}" >{{statusTextOFF}}</p>
             <div class="d-flex justify-content-center">
-                <button type="button " class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+                <button type="button " class="btn btn-info" (click)="onClickChangeToDetergent()">Info</button>
             </div>
         </div>
     </div>
@@ -20,7 +21,7 @@
             <h4 class="card-title">Detergent to used</h4>
             <p class="card-text">Please use 2 scoops of Detergent</p>
             <div class="glass2">
-                <div class="wine">
+                <div class="wine"> 
                 </div>
             </div>
             <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Laundry basket</button>

@@ -1,19 +1,26 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, SimpleChanges } from '@angular/core';
 import { userDetails } from 'src/app/models/userInfo.model';
 
 @Component({
-  selector: 'app-airvent',
+  selector: 'app-airvent',   
   templateUrl: './airvent.component.html',
   styleUrls: ['./airvent.component.scss']
 })
 export class AirventComponent implements OnInit {
 
-  @Input() public userInfo: userDetails | null | undefined; // decorate the property with @Input()
+  @Input() public userInfo: any; // decorate the property with @Input()
 
 
   colorOfDevice = 'white';
 
-  power:boolean=true;
+  power:boolean | undefined;
+
+  ngOnChanges(change: SimpleChanges){
+    if(change.userInfo && this.userInfo){
+      this.power= this.userInfo.users!.devices.ventStatus;
+      console.log(this.power);
+    }
+  }
 
   constructor() { }
 
@@ -27,86 +34,16 @@ export class AirventComponent implements OnInit {
   }
 
 
-  
-  public color:any = {
 
-    twenty : "#0cf500",
-    fourty: "#c8f500",
-    sixty : "#f79a16",
-    eighty : "#f56016",
-    hundred : "#f51616"
 
-  };
-
-  public laundeyStatus = 0;
-
-  
-
-  public a20 = {
-    height : '20%',
-    background : '#0cf500'
-  }
-
-  public a40 = {
-    height : '40%',
-    background : '#bbfa32'
-  }
-
-  public a60 = {
-    height : '60%',
-    background : '#f79a16'
-  }
-
-  public a80 = {
-    height : '80%',
-    background : '#f56016'
-  }
-
-  public a100 = {
-    height : '100%',
-    background : '#f51616'
-  }
-
-  public a0 = {
-    height : '0%',
-    background : '#f51616'
-  }
-
-  public statusText = "Washing machine is ON";
+  public statusTextON =  "Air Vents are Dirty";
+  public statusTextOFF =  "Air Vents are is CLEAN";
 
   public getScreenWidth: any;
   public getScreenHeight: any;
 
 
-  public onPercentageChangeColor() : any {
 
-    switch (this.laundeyStatus) {
-      case 20:
-          this.statusText = "Laundry Basket is just 20% keep going";
-          return (this.a20);
-
-      case 40:
-        this.statusText = "Laundry Basket is just 40% keep going";
-        return (this.a40);
-      case 60:
-        this.statusText = "Laundry Basket is just 60% keep going";
-        return (this.a60);
-
-      case 80:
-        this.statusText = "Laundry Basket is almost full. Please do laundry";
-        return (this.a80);
-
-      case 100:
-        this.statusText = "Laundry Basket is full. You are good to go complete your laundry";
-        return (this.a100);
-
-      default:
-        this.statusText = "Washing machine is OFF";
-        return (this.a0);
-  
-  }
-
-  }
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {

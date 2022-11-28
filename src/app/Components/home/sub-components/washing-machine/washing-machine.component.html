@@ -14,7 +14,8 @@
         <div class="card-body">
             <h4 class="card-title d-flex justify-content-center" [ngStyle]="{'color': colorOfDevice }">Washing machine
                 status</h4>
-            <p class="card-text d-flex justify-content-center" [ngStyle]="{'color': colorOfDevice }">{{statusText}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "power" [ngStyle]="{'color': colorOfDevice }">{{statusTextON}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "!power" [ngStyle]="{'color': colorOfDevice }">{{statusTextOFF}}</p>
             <div class="d-flex justify-content-center">
                 <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
             </div>

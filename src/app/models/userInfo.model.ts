@@ -9,6 +9,7 @@ export interface userDetails {
       devices : {
         laundryBasketStatus: number,
         DustbinStatus: boolean,
-        ventStatus: string
+        ventStatus: boolean,
+        washingMachineStatus: boolean
       }
 }

@@ -17,21 +17,21 @@
                         <circle fill="#dcdaed" cx="21" cy="21" r="4" />
                     </g>
                 </symbol>
-            </svg>
-        
+            </svg> 
+         
+ 
 
-
-        <svg class="shape-airvent" viewBox="0 0 42 42" width="0" height="0" fill="transparent">
+        <svg class="shape-airvent" [ngClass]="{'shape-airvent':power,'animate-stop':!power  }" viewBox="0 0 42 42" width="0" height="0" fill="transparent">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#AirventIcon"></use>
         </svg>
 
 
         <div class="card-body">
-            <h4 class="card-title d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}">Recycle Bin
-                Status</h4>
-            <p class="card-text d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}">{{statusText}}</p>
+            <h4 class="card-title d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}">AirVent Status</h4>
+            <p class="card-text d-flex justify-content-center" *ngIf = "!power" [ngStyle]="{ 'color' : colorOfDevice}">{{statusTextON}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "power" [ngStyle]="{ 'color' : colorOfDevice}">{{statusTextOFF}}</p>
             <div class="d-flex justify-content-center">
-                <button type="button " class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+                <button type="button " class="btn btn-info" (click)="onClickChangeToDetergent()">info</button>
             </div>
         </div>
     </div>
@@ -44,6 +44,7 @@
                 </div>
             </div>
             <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Laundry basket</button>
+            
         </div>
 
 

@@ -112,6 +112,7 @@ export class DashboardComponent implements OnInit {
   displayStyleLaundry = "none";
   displayStyleBin = "none";
   displayStyleWM = "none";
+  displayStyleAV = "none";
 
 
   openPopup(nameOfDevice: String) {
@@ -127,6 +128,9 @@ export class DashboardComponent implements OnInit {
 
       case 'WM':
         this.displayStyleWM = "block";
+        break;
+      case 'AV':
+        this.displayStyleAV = "block";
         break;
 
       default:
@@ -152,6 +156,9 @@ export class DashboardComponent implements OnInit {
 
       case 'WM':
         this.displayStyleWM = "none";
+        break;
+      case 'AV':
+        this.displayStyleAV = "none";
         break;
       default:
         console.log('Somthing really went wrong in close switch');

@@ -36,6 +36,8 @@ export class DashboardComponent implements OnInit {
     ;
     this.setData();
     this.roomsData = service.getRoomsData();
+    this.customizeColor = this.customizeColor.bind(this);
+    this.customizeTooltip = this.customizeTooltip.bind(this);
     this.buildingData = service.getBuildingData();
     this.projection = {
       to(coordinates: number[]) {
@@ -65,15 +67,31 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  customizeTooltip(arg: { layer: { name: string; }; attribute: (arg0: string) => any; }) {
-    if (arg.layer.name === 'rooms') {
+  customizeTooltip(arg: { attribute: (arg0: string) => any; }) {
+    const name = arg.attribute('name');
+    if(this.demo.includes(name)){
       return {
-        text: `Square: ${arg.attribute('square')} ft&#178`,
+        text: `${name} is cleaned`
       };
     }
-    else {
-      return;
+    else{
+      return {
+        text: `${name} is yet to be cleaned`
+      };
     }
+  }
+
+  demo=['Room 4','Room 2']
+
+  customizeColor(elements: any[]) {
+    elements.forEach((element) => {
+      const room = element.attribute('name');
+      if(!this.demo.includes(room)){
+        element.applySettings({
+          color: '#8b0010'
+        });
+      }
+    });
   }
 
   ngOnInit(): void {

@@ -10,13 +10,12 @@ export class Feature {
   type: string | undefined;
 
   properties?: FeatureProperty;
-
   geometry: FeatureGeometry = new FeatureGeometry;
 }
 
 export class FeatureProperty {
   name: string | undefined;
-
+  color: string | undefined;
   square?: number;
 }
 
@@ -78,6 +77,7 @@ const roomsData: FeatureCollection = {
       properties: {
         name: 'Room 1',
         square: 576,
+        color: '#FFFFFF'
       },
       geometry: {
         type: 'Polygon',
@@ -93,6 +93,7 @@ const roomsData: FeatureCollection = {
       properties: {
         name: 'Room 2',
         square: 600,
+        color: '#FFFFFF'
       },
       geometry: {
         type: 'Polygon',
@@ -108,6 +109,7 @@ const roomsData: FeatureCollection = {
       properties: {
         name: 'Room 3',
         square: 540,
+        color: '#FFFFFF'
       },
       geometry: {
         type: 'Polygon',
@@ -123,6 +125,7 @@ const roomsData: FeatureCollection = {
       properties: {
         name: 'Room 4',
         square: 288,
+        color: '#FFFFFF'
       },
       geometry: {
         type: 'Polygon',

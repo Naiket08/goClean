@@ -1,18 +1,22 @@
-<div class="container ">
-  <div class="card container-size" *ngIf="!flipStatus" style="width:400px"
-    style="background-color: transparent; border: 0px" ngClass="animate__animated animate__fadeIn">
-    <section>
-      <div class="glass">
-        <div class="wine" [ngStyle]="onPercentageChangeColor()">
+<div class="container">
+  <div>
+    <div class="card container-size" *ngIf="!flipStatus" style="width:400px"
+      style="background-color: transparent; border: 0px" ngClass="animate__animated animate__fadeIn">
+      <section >
+        <div class="glass">
+          <div class="wine" [ngStyle]="onPercentageChangeColor()">
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="card-body">
-      <h4 class="card-title" id="step1" data-intro="Welcome to your new app!" [ngStyle]="{'color': colorOfDevice }">
-        Laundry Basket Status</h4>
-      <p class="card-text" [ngStyle]="{'color': colorOfDevice }">{{statusText}}</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+      </section>
+      <div class="card-body" id="step1">
+        <h4 class="card-title" [ngStyle]="{'color': colorOfDevice }">
+          Laundry Basket Status</h4>
+        <p class="card-text" [ngStyle]="{'color': colorOfDevice }">{{statusText}}</p>
+        <div class="d-flex justify-content-center" id="step2">
+          <button type="button" class="btn btn-info" *ngIf="!isNewUser"
+            (click)="onClickChangeToDetergent()">Detergent</button>
+          <button type="button" class="btn btn-info" *ngIf="isNewUser" (click)="callIntroJs()">Intiate</button>
+        </div>
       </div>
     </div>
   </div>

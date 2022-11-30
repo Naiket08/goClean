@@ -7,8 +7,10 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { UserinfoService } from '../helper/userinfo.service';
-
-
+import { UserInfoState } from 'src/app/Store/userInfo/userInfo.state';
+import { Store } from '@ngrx/store';
+import { postNewUser, postUsers } from 'src/app/Store/userInfo/userInfo.action';
+import {userDetails} from 'src/app/models/userInfo.model'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,8 +38,10 @@ export class LoginComponent implements OnInit {
   userCreatedSuccess = false;
   userCreatedFailed = false;
 
+  userVisitFirst = false;
 
-  constructor(public auth: Auth, public router: Router, private fb: FormBuilder, public afAuth: AngularFireAuth, public getUserInfo: UserinfoService) { }
+
+  constructor(public auth: Auth, public router: Router, private fb: FormBuilder, private store: Store<UserInfoState>, public afAuth: AngularFireAuth, public getUserInfo: UserinfoService) { }
 
   loginForm = this.fb.group({
     userNameLogin: new FormControl('', Validators.compose([Validators.required])),
@@ -105,22 +109,21 @@ export class LoginComponent implements OnInit {
 
 
   onSubmitHandleRegister() {
-
     createUserWithEmailAndPassword(this.auth, this.userNameRegister, this.passwordRegister)
       .then((response: any) => {
         this.userCreatedSuccess = !this.userCreatedSuccess;
         this.userCreatedFailed = false;
         console.log(response)
         console.log(response.user.reloadUserInfo.localId)
-
+        this.userVisitFirst = true;
         this.addUserToDb(response.user.reloadUserInfo.localId, this.userNameRegister);
-
+        localStorage.setItem('newUser', 'true');
+        this.store.dispatch(postNewUser({newUser: true}));
         setTimeout(() => {
           console.log("Delayed for 2 second.");
-          this.refresh();
-
+          this.displaySignUp = !this.displaySignUp
+          this.router.navigateByUrl('/login'); 
         }, 4000)
-
       })
       .catch((err) => {
         console.log(err.message);
@@ -134,14 +137,12 @@ export class LoginComponent implements OnInit {
         this.userCreatedFailed = !this.userCreatedFailed;
 
       })
-
   }
 
   onSubmitHandleLogin() {
 
     signInWithEmailAndPassword(this.auth, this.userNameLogin, this.passwordLogin)
       .then((response: any) => {
-        console.log(response.user)
         this.userLoginFailed = false;
         this.router.navigateByUrl("/Home");
         console.log(response.user.reloadUserInfo.localId);

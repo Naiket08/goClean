@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { LoginComponent } from './Components/login/login.component';
 import { HomeComponent } from './Components/home/home.component';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
@@ -64,6 +65,7 @@ import { AirventComponent } from './Components/home/sub-components/airvent/airve
     MatSidenavModule,
     MatRadioModule,
     MatFormFieldModule,
+    MatInputModule,
     MatSelectModule,
     MatButtonModule,
     MatToolbarModule,

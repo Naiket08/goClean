@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy } from '@angular/compiler';
-import { Component, Input, OnInit, SimpleChanges,HostListener, SimpleChange } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Component, Input, OnInit, SimpleChanges, HostListener, SimpleChange } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { resultMemoize, select, Store } from '@ngrx/store';
 import { IntrojsService } from 'src/app/introjs.service';
 import { GlobalStateInterface } from 'src/app/models/globalState.interface';
 import { userDetails } from 'src/app/models/userInfo.model';
 import { UserInfoState } from 'src/app/Store/userInfo/userInfo.state';
+import { CleaningCycleComponent } from '../cleaning-cycle/cleaning-cycle.component';
 
 @Component({
   selector: 'app-laundry-basket',
@@ -13,8 +15,11 @@ import { UserInfoState } from 'src/app/Store/userInfo/userInfo.state';
 })
 export class LaundryBasketComponent implements OnInit {
   @Input() public userInfo: any; // decorate the property with @Input()
+  @Input() public newUser: boolean | undefined | null; // decorate the property with @Input()
+  isNewUser: boolean = true;
+  public laundryStatus: number | undefined;
 
-  constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>) {
+  constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>, private dialog: MatDialog) {
   }
 
   public getScreenWidth: any;
@@ -26,32 +31,62 @@ export class LaundryBasketComponent implements OnInit {
     this.getScreenHeight = window.innerHeight;
   }
 
-  ngOnChanges(change: SimpleChanges){
-    if(change.userInfo && this.userInfo){
-      this.laundryStatus= this.userInfo.users!.devices.laundryBasketStatus;
+  ngOnChanges(change: SimpleChanges) {
+    if (change.userInfo && this.userInfo) {
+      this.laundryStatus = this.userInfo.users!.devices.laundryBasketStatus;
+    }
+    if (change.newUser && this.newUser) {
+      this.isNewUser = this.newUser;
+      console.log(this.isNewUser);
     }
   }
 
   ngOnInit(): void {
-    // this.introJs.featureOne();
     console.log(this.userInfo);
+    console.log(this.newUser);
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
 
-    if(this.getScreenWidth>720){
+    if (this.getScreenWidth > 720) {
       this.colorOfDevice = 'white';
     }
 
-    else{
+    else {
       this.colorOfDevice = 'black';
     }
   }
 
+  public callIntroJs() {
+    if (this.isNewUser) {
+      this.introJs.featureOne();
+      const dialogConfig = new MatDialogConfig();
+
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+        id: 1,
+        title: 'Laundry Basket status',
+        source: 'LB',
+        label: 'Please tell us about the maximum load of your washing machine'
+      };
+
+      const data = this.dialog.open(CleaningCycleComponent, dialogConfig);
+      console.log(data);
+      debugger;
+      const gotIt = data.afterClosed().subscribe((result) => 
+      this.laundryStatus =  result.description
+      )
+      debugger;
+      if(gotIt.closed !== false){
+        console.log(this.laundryStatus, 'from got it');
+      }
+    
+    }
+  }
 
 
   flipStatus = false; //this flag used to flip the laundry card to detergent 
 
- 
+
 
   colorOfDevice = 'black';
 
@@ -75,7 +110,7 @@ export class LaundryBasketComponent implements OnInit {
 
   };
 
-  public laundryStatus: number | undefined;
+
 
 
 
@@ -113,8 +148,8 @@ export class LaundryBasketComponent implements OnInit {
 
 
 
-  public onPercentageChangeColor(): any {
-    switch (this.laundryStatus) {
+  public onPercentageChangeColor(laundryStatus?: number): any {
+    switch (this.laundryStatus || laundryStatus) {
       case 20:
         this.statusText = "Laundry Basket is just 20% keep going";
         return (this.a20);
@@ -135,7 +170,7 @@ export class LaundryBasketComponent implements OnInit {
         return (this.a100);
 
       default:
-        this.statusText = "Laundry Basket is empty";
+        this.statusText = "Intiate Laundry Basket";
         return (this.a0);
 
     }

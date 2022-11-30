@@ -18,7 +18,7 @@
       <div>
       <div class="row" *ngIf="getScreenWidth>720 && !flipDevices ">
         <div class="col">
-          <app-laundry-basket [userInfo]="userState$ | async"></app-laundry-basket>
+          <app-laundry-basket [userInfo]="userState$ | async" [newUser]="firstTimeUser$ | async"></app-laundry-basket>
         </div>
         <div class="col">
           <app-recycle-bin [userInfo]="userState$ | async"></app-recycle-bin>
@@ -222,8 +222,8 @@
 
   <section id="section-3" class="three">
     <!-- <h1>Cleaning Cycle</h1> -->
-    <div class="d-flex justify-content-center position-relative clean-cycle">Give us your preferences for <button mat-button type="button" (click)="openForm()">cleaning cycle</button> to initialise
-      your cleaning map </div>
+    <div class="d-flex justify-content-center position-relative clean-cycle">Give us your preferences for <button
+      mat-button type="button" (click)="openForm()">cleaning cycle</button> to initialise your cleaning map </div>
     <div class="map-view d-flex justify-content-center position-relative">
       <dx-vector-map id="vector-map" [projection]="projection">
         <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>

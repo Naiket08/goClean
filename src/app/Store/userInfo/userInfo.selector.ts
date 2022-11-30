@@ -19,6 +19,11 @@ export const isLoadingSelector = createSelector(
     selectFeature,
     (state) => state.uId
   );
+
+  export const newUserSelector = createSelector(
+    selectFeature,
+    (state) => state.newUser
+  );
   
   export const errorSelector = createSelector(
     selectFeature,

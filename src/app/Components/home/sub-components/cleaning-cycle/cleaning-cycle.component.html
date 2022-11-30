@@ -1,17 +1,15 @@
-<h2 mat-dialog-title>Cleaning cycle preferences</h2>
+<h2 mat-dialog-title>{{title}}</h2>
 
 <mat-dialog-content [formGroup]="form">
-  
     <mat-form-field>
-        <input matInput
-                placeholder="Course Description"
-               formControlName="description">
+        <label class="label-style">{{label}}</label>
+        <input matInput class="input-field" placeholder="" formControlName="description">
     </mat-form-field>
- 
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+    <div class="d-flex justify-content-between w-100">
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button save" (click)="save()">Save</button>
+    </div>
 </mat-dialog-actions>
-

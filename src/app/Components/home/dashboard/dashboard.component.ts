@@ -6,7 +6,7 @@ import { Service, FeatureCollection } from 'src/app/map.service';
 import { GlobalStateInterface } from 'src/app/models/globalState.interface';
 import { Observable } from 'rxjs';
 import { userDetails } from 'src/app/models/userInfo.model';
-import { userSelector } from 'src/app/Store/userInfo/userInfo.selector';
+import { newUserSelector, userSelector } from 'src/app/Store/userInfo/userInfo.selector';
 import { UserInfoState } from 'src/app/Store/userInfo/userInfo.state';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CleaningCycleComponent } from '../sub-components/cleaning-cycle/cleaning-cycle.component';
@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   buildingData: FeatureCollection;
   screenWidth = 0;
   userState$: Observable<userDetails | undefined> | undefined;
+  firstTimeUser$: Observable<boolean | undefined> | undefined;
 
   // users$: Observable<userDetails>;
 
@@ -122,6 +123,10 @@ export class DashboardComponent implements OnInit {
     this.userState$ = this.store.pipe(select(userSelector));
     this.userState$.subscribe((state:any) => {
       this.userInformation= state.users;
+    })
+    this.firstTimeUser$ = this.store.pipe(select(newUserSelector));
+    this.firstTimeUser$.subscribe((state:any)=>{
+      console.log(state);
     })
   }
   data = this.userdata.currentUserUniqueId;

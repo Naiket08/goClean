@@ -29,7 +29,7 @@ export const reducers = createReducer(
     on(UserActions.postLoading, (state) => ({ ...state, isLoading: true })),
     on(UserActions.postUid, (state, action) => ({ ...state, uId: action.uId })),
     on(UserActions.postUsers, (state, action) => ({ ...state, users: action.users })),
-
+    on(UserActions.postNewUser, (state, action) => ({ ...state, newUser: action.newUser }))
     // on(UserActions.getPostsSuccess, (state, action) => ({
     //   ...state,
     //   isLoading: false,

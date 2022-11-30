@@ -10,10 +10,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class CleaningCycleComponent implements OnInit {
   form!: FormGroup;
   description: string;
+  title: string;
+  source: string;
+  label: string;
+  
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<CleaningCycleComponent>, @Inject(MAT_DIALOG_DATA) data:any) {
     this.description = data.description;
+    this.title = data.title;
+    this.source = data.source;
+    this.label = data.label;
   }
 
   ngOnInit(): void {
@@ -24,7 +31,9 @@ export class CleaningCycleComponent implements OnInit {
 
 
   save() {
-    this.dialogRef.close(this.form!.value);
+    //add to db
+    debugger;
+    return this.dialogRef.close(this.form!.value);
   }
 
   close() {

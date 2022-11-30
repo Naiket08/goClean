@@ -97,3 +97,25 @@ ul{
     width: 20px;
     border-radius: 15px;
   }
+
+  ul{
+    list-style-type: none;
+    margin: 0;
+  }
+
+  li { float:left; }
+
+.col-7{
+    padding: 0;
+}
+
+.col-5{
+    padding:0;
+}
+.add-border{
+    border: 3px solid #60994a ;
+}
+
+.room-color-clean{
+    background-color: #f56942;
+}

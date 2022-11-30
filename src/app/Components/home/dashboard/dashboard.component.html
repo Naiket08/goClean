@@ -220,9 +220,9 @@
     </div>
   </section>
 
-  <section id="section-3" class="three">
+  <section id="section-3" class="three" *ngIf="getScreenWidth>720">
     <!-- <h1>Cleaning Cycle</h1> -->
-    <div class="d-flex justify-content-center position-relative clean-cycle">Give us your preferences for <button
+    <div class=" clean-cycle">Give us your preferences for <button
       mat-button type="button" (click)="openForm()">cleaning cycle</button> to initialise your cleaning map </div>
     <div class="map-view d-flex justify-content-center position-relative">
       <dx-vector-map id="vector-map" [projection]="projection">
@@ -234,4 +234,63 @@
       </dx-vector-map>
     </div>
   </section>
+
+  <section id="section-3" class="three" *ngIf="getScreenWidth<720">
+    <div class = "container container-color ">
+      <br><br><br>
+      <div class="row ">
+        <div class=" clean-cycle">Give us your preferences for <button
+          mat-button type="button" (click)="openForm()">cleaning cycle</button> to initialise your cleaning map </div>
+        
+      </div>
+
+
+
+
+    
+        <div class = "row add-border"  [ngStyle]="{'height': getScreenHeight*(22/100)+'px'}">
+          <div class="card" [ngClass]=" {'room-color-clean': !this.userInformation?.room?.room1}">
+            <div class="card-body">
+              <h4>Kitchen</h4>
+
+            </div>
+          </div>
+        </div>
+        <div class = "row add-border" [ngStyle]="{'height': getScreenHeight*(22/100)+'px'}">
+          <div class="card" [ngClass]=" {'room-color-clean': !this.userInformation?.room?.room2}" >
+            <div class="card-body">
+              <h4>Hall</h4>
+
+            </div>
+          </div>
+        </div>
+        <div class = 'row' >
+          <div class = "col-7 add-border" >
+            <div class="card" [ngStyle]="{'height': getScreenHeight*(22/100)+'px'}" [ngClass]=" {'room-color-clean': !this.userInformation?.room?.room3}" >
+              <div class="card-body">
+                <h4>BedRoom</h4>
+  
+              </div>
+            </div>
+          </div>
+          <div class = "col-5 add-border">
+            <div class="card" [ngStyle]="{'height': getScreenHeight*(22/100)+'px'}" [ngClass]=" {'room-color-clean': !this.userInformation?.room?.room4}" >
+              <div class="card-body">
+                <h4>Bathroom</h4>
+  
+              </div>
+            </div>
+
+            
+          </div>
+
+
+
+          
+        </div>
+    </div>
+  </section>
+
+
+
 </div>

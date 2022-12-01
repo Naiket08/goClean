@@ -2,15 +2,15 @@
     <div class="card container-size" *ngIf="!flipStatus" style="background-color: transparent; border: 0px; width:400px"
         ngClass="animate__animated animate__fadeIn">
         <section>
-            <span [ngClass]="!empty?'trash':'trash-shake'">
+            <span [ngClass]="empty?'trash':'trash-shake'">
                 <span></span>
                 <i></i>
             </span>
         </section>
         <div class="card-body">
             <h4 class="card-title d-flex justify-content-center" [ngStyle]="{ 'color' : colorOfDevice}" >Recycle Bin Status</h4>
-            <p class="card-text d-flex justify-content-center" *ngIf = "!empty" [ngStyle]="{ 'color' : colorOfDevice}" >{{statusTextON}}</p>
-            <p class="card-text d-flex justify-content-center" *ngIf = "empty" [ngStyle]="{ 'color' : colorOfDevice}" >{{statusTextOFF}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "empty" [ngStyle]="{ 'color' : colorOfDevice}" >{{statusTextON}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "!empty" [ngStyle]="{ 'color' : colorOfDevice}" >{{statusTextOFF}}</p>
             <div class="d-flex justify-content-center">
                 <button type="button " class="btn btn-info" (click)="onClickChangeToDetergent()">Info</button>
             </div>

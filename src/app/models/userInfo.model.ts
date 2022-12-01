@@ -11,5 +11,11 @@ export interface userDetails {
         DustbinStatus: boolean,
         ventStatus: boolean,
         washingMachineStatus: boolean
+      },
+      room:{
+        room1: boolean,
+        room2: boolean,
+        room3: boolean,
+        room4: boolean
       }
 }

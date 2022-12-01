@@ -99,6 +99,12 @@ export class LoginComponent implements OnInit {
         DustbinStatus: false,
         ventStatus: false,
         washingMachineStatus: false
+      },
+      room:{
+        room1: false,
+        room2: false,
+        room3: false,
+        room4: false
       }
 
     });
@@ -181,6 +187,12 @@ export class LoginComponent implements OnInit {
         DustbinStatus: false,
         ventStatus: false,
         washingMachineStatus: false
+      },      
+      room:{
+        room1: false,
+        room2: false,
+        room3: false,
+        room4: false
       }
 
     }); 

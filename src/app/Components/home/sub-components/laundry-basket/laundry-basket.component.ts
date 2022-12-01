@@ -2,11 +2,16 @@ import { ChangeDetectionStrategy } from '@angular/compiler';
 import { Component, Input, OnInit, SimpleChanges, HostListener, SimpleChange } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { resultMemoize, select, Store } from '@ngrx/store';
+import { getDatabase, ref, set, update } from 'firebase/database';
 import { IntrojsService } from 'src/app/introjs.service';
 import { GlobalStateInterface } from 'src/app/models/globalState.interface';
 import { userDetails } from 'src/app/models/userInfo.model';
+import { postNewUser } from 'src/app/Store/userInfo/userInfo.action';
+import { newUserSelector, userSelector } from 'src/app/Store/userInfo/userInfo.selector';
 import { UserInfoState } from 'src/app/Store/userInfo/userInfo.state';
 import { CleaningCycleComponent } from '../cleaning-cycle/cleaning-cycle.component';
+import { addDoc, Firestore, collection } from '@angular/fire/firestore'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-laundry-basket',
@@ -19,7 +24,8 @@ export class LaundryBasketComponent implements OnInit {
   isNewUser: boolean = true;
   public laundryStatus: number | undefined;
 
-  constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>, private dialog: MatDialog) {
+  constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>, private dialog: MatDialog, public firestore: Firestore) {
+
   }
 
   public getScreenWidth: any;
@@ -34,16 +40,13 @@ export class LaundryBasketComponent implements OnInit {
   ngOnChanges(change: SimpleChanges) {
     if (change.userInfo && this.userInfo) {
       this.laundryStatus = this.userInfo.users!.devices.laundryBasketStatus;
-    }
-    if (change.newUser && this.newUser) {
-      this.isNewUser = this.newUser;
+      this.isNewUser = this.userInfo.users!.userdetails.isNewUser;
       console.log(this.isNewUser);
     }
   }
 
   ngOnInit(): void {
     console.log(this.userInfo);
-    console.log(this.newUser);
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
 
@@ -57,30 +60,31 @@ export class LaundryBasketComponent implements OnInit {
   }
 
   public callIntroJs() {
-    if (this.isNewUser) {
-      this.introJs.featureOne();
-      const dialogConfig = new MatDialogConfig();
+    this.introJs.featureOne();
+    const dialogConfig = new MatDialogConfig();
 
-      dialogConfig.autoFocus = true;
-      dialogConfig.data = {
-        id: 1,
-        title: 'Laundry Basket status',
-        source: 'LB',
-        label: 'Please tell us about the maximum load of your washing machine'
-      };
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      title: 'Laundry Basket status',
+      source: 'LB',
+      label: 'Please tell us about the maximum load of your washing machine'
+    };
 
-      const data = this.dialog.open(CleaningCycleComponent, dialogConfig);
-      console.log(data);
-      debugger;
-      const gotIt = data.afterClosed().subscribe((result) => 
-      this.laundryStatus =  result.description
-      )
-      debugger;
-      if(gotIt.closed !== false){
-        console.log(this.laundryStatus, 'from got it');
-      }
-    
-    }
+    const data = this.dialog.open(CleaningCycleComponent, dialogConfig);
+    console.log(data);
+    debugger;
+    data.beforeClosed().subscribe((result) => {
+      localStorage.setItem('newUser', 'false');
+      const db = getDatabase();
+      const UserId = localStorage.getItem('UserID');
+
+      update(ref(db, 'Customers/' + UserId + '/userdetails/'), {
+        isNewUser: false
+      })
+      this.statusText = "Laundry Basket initiated";
+
+    });
   }
 
 
@@ -148,31 +152,35 @@ export class LaundryBasketComponent implements OnInit {
 
 
 
-  public onPercentageChangeColor(laundryStatus?: number): any {
-    switch (this.laundryStatus || laundryStatus) {
-      case 20:
-        this.statusText = "Laundry Basket is just 20% keep going";
-        return (this.a20);
+  public onPercentageChangeColor(): any {
+    if (!this.isNewUser) {
+      switch (this.laundryStatus) {
+        case 20:
+          this.statusText = "Laundry Basket is just 20% keep going";
+          return (this.a20);
 
-      case 40:
-        this.statusText = "Laundry Basket is just 40% keep going";
-        return (this.a40);
-      case 60:
-        this.statusText = "Laundry Basket is just 60% keep going";
-        return (this.a60);
+        case 40:
+          this.statusText = "Laundry Basket is just 40% keep going";
+          return (this.a40);
+        case 60:
+          this.statusText = "Laundry Basket is just 60% keep going";
+          return (this.a60);
 
-      case 80:
-        this.statusText = "Laundry Basket is almost full. Please do laundry";
-        return (this.a80);
+        case 80:
+          this.statusText = "Laundry Basket is almost full. Please do laundry";
+          return (this.a80);
 
-      case 100:
-        this.statusText = "Laundry Basket is full. You are good to go complete your laundry";
-        return (this.a100);
+        case 100:
+          this.statusText = "Laundry Basket is full. You are good to go complete your laundry";
+          return (this.a100);
 
-      default:
-        this.statusText = "Intiate Laundry Basket";
-        return (this.a0);
-
+        default:
+          this.statusText = "Intiate Laundry Basket";
+          if (!this.isNewUser) {
+            this.statusText = "Laundry Basket Initiated";
+          }
+          return (this.a0);
+      }
     }
 
   }

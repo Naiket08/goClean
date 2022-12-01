@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChange, SimpleChanges, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { get } from 'firebase/database';
+import { get, getDatabase, ref, update } from 'firebase/database';
 import { UserinfoService } from '../../helper/userinfo.service';
 import { select, Store } from '@ngrx/store';
 import { Service, FeatureCollection } from 'src/app/map.service';
@@ -29,16 +29,17 @@ export class DashboardComponent implements OnInit {
   screenWidth = 0;
   userState$: Observable<userDetails | undefined> | undefined;
   firstTimeUser$: Observable<boolean | undefined> | undefined;
+  isNewUser: boolean | undefined;
+  demo = ['Kitchen', 'Living Room', 'Bedroom', 'Bathroom']
 
   // users$: Observable<userDetails>;
 
 
   constructor(public userdata: UserinfoService, service: Service, private store: Store<UserInfoState>, private dialog: MatDialog) {
-    ;
     this.setData();
     this.roomsData = service.getRoomsData();
-    this.customizeColor = this.customizeColor.bind(this);
-    this.customizeTooltip = this.customizeTooltip.bind(this);
+    // this.customizeColor = this.customizeColor.bind(this);
+    // this.customizeTooltip = this.customizeTooltip.bind(this);
     this.buildingData = service.getBuildingData();
     this.projection = {
       to(coordinates: number[]) {
@@ -67,32 +68,91 @@ export class DashboardComponent implements OnInit {
     this.getScreenHeight = window.innerHeight;
   }
 
+  openForm() {
+    const dialogConfig = new MatDialogConfig();
+
+    // dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: 'Cleaning Cycle',
+      source: 'DB',
+    };
+
+    const data = this.dialog.open(CleaningCycleComponent, dialogConfig);
+    data.beforeClosed().subscribe((result) => {
+      localStorage.setItem('newUser', 'false');
+      const db = getDatabase();
+      const UserId = localStorage.getItem('UserID');
+
+      update(ref(db, 'Customers/' + UserId + '/userdetails/'), {
+        isNewUser: false
+      });
+      this.isNewUser = false;
+      window.location.reload();
+    });
+  }
 
   customizeTooltip(arg: { attribute: (arg0: string) => any; }) {
     const name = arg.attribute('name');
-    if(this.demo.includes(name)){
+    if (this.isNewUser) {
       return {
-        text: `${name} is cleaned`
+        text: `Kindly Initialise cleaning cycle`
       };
     }
-    else{
+    if (this.demo.includes(name)) {
       return {
-        text: `${name} is yet to be cleaned`
+        text: `${name} is clean`
+      };
+    }
+    else {
+      return {
+        text: `Time to clean the ${name}`
       };
     }
   }
 
-  demo=['Room 4','Room 2']
 
   customizeColor(elements: any[]) {
-    elements.forEach((element) => {
-      const room = element.attribute('name');
-      if(!this.demo.includes(room)){
-        element.applySettings({
-          color: '#CC5C5E'
-        });
+    if (!this.isNewUser) {
+      console.log(this.userInformation);
+      if (this.userInformation && this.userInformation.room) {
+        // this.demo = ['Kitchen','Bedroom', 'Living Room']
+
+        if (this.userInformation.room.room1)
+          this.demo = ['Bedroom', 'Kitchen', 'Living Room']
+
+        else if (this.userInformation.room.room2) {
+          this.demo = ['Kitchen', 'Bedroom', 'Bathroom']
+        }
+        else if (this.userInformation.room.room3) {
+          this.demo = ['Bathroom', 'Kitchen', 'Living Room']
+        }
+        else if (this.userInformation.room.room4) {
+          this.demo = ['Living Room', 'Bathroom', 'Bedroom']
+        }
+      
       }
-    });
+      elements.forEach((element) => {
+        const room = element.attribute('name');
+        if (!this.demo.includes(room)) {
+          element.applySettings({
+            color: '#CC5C5E'
+          });
+        }
+      });
+    }
+    else {
+      this.demo = ['Living Room', 'Bathroom', 'Bedroom','Kitchen'];
+      elements.forEach((element) => {
+        const room = element.attribute('name');
+        if (!this.demo.includes(room)) {
+          element.applySettings({
+            color: '#8b0010'
+          });
+        }
+      });
+    }
+
   }
 
   ngOnInit(): void {
@@ -101,18 +161,22 @@ export class DashboardComponent implements OnInit {
     }, 2000)
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
+    // if (this.userInformation && this.userInformation.room) {
+    //   this.customizeColor = this.customizeColor.bind(this);
+    // }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    if (changes.userInformation && this.userInformation) {
+      this.setData();
+    }
   }
 
   changeTextSection2() {
     this.textSection1 = this.textSection1_2;
   }
 
-  public setData() {
-    ;
+  public async setData() {
     const data = this.userdata.currentUserUniqueId ? this.userdata.currentUserUniqueId : localStorage.getItem('UserID');
     if (data) {
       this.userInfo$ = this.userdata.getUserInfo();
@@ -121,12 +185,16 @@ export class DashboardComponent implements OnInit {
       // })
     }
     this.userState$ = this.store.pipe(select(userSelector));
-    this.userState$.subscribe((state:any) => {
-      this.userInformation= state.users;
+    await this.userState$.subscribe((state: any) => {
+      this.userInformation = state.users;
+      this.isNewUser = this.userInformation?.userdetails.isNewUser;
+      if (state.users && state.users.room) {
+        this.customizeColor = this.customizeColor.bind(this);
+        this.customizeTooltip = this.customizeTooltip.bind(this);
+      }
     })
     this.firstTimeUser$ = this.store.pipe(select(newUserSelector));
-    this.firstTimeUser$.subscribe((state:any)=>{
-      console.log(state);
+    this.firstTimeUser$.subscribe((state: any) => {
     })
   }
   data = this.userdata.currentUserUniqueId;
@@ -159,8 +227,6 @@ export class DashboardComponent implements OnInit {
       default:
         console.log('Somthing really went wrong in open switch');
         break;
-
-
     }
 
 
@@ -195,27 +261,16 @@ export class DashboardComponent implements OnInit {
 
 
   }
-  openForm() {
-    const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
-  };
-
-    this.dialog.open(CleaningCycleComponent, dialogConfig);
-  }
 
 
   flipDevices = false;
-  
-  onFlipDevice1(){
+
+  onFlipDevice1() {
     this.flipDevices = false;
   }
 
-  onFlipDevice2(){
+  onFlipDevice2() {
     this.flipDevices = true;
   }
 

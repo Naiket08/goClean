@@ -19,6 +19,7 @@ export class LaundryBasketComponent implements OnInit {
   @Input() public newUser: boolean | undefined | null; // decorate the property with @Input()
   isNewUser: boolean = true;
   public laundryStatus: number | undefined;
+  laundryInit: string | undefined;
 
   constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>, private dialog: MatDialog) {
   }
@@ -36,6 +37,7 @@ export class LaundryBasketComponent implements OnInit {
     if (change.userInfo && this.userInfo) {
       this.laundryStatus = this.userInfo.users!.devices.laundryBasketStatus;
       this.isNewUser = this.userInfo.users!.userdetails.isNewUser;
+      this.laundryInit= this.userInfo.users!.devices.laundryBasket;
     }
   }
 
@@ -70,9 +72,13 @@ export class LaundryBasketComponent implements OnInit {
       const db = getDatabase();
       const UserId = localStorage.getItem('UserID');
 
-      update(ref(db, 'Customers/' + UserId + '/userdetails/'), {
-        isNewUser: false
-      })
+      // update(ref(db, 'Customers/' + UserId + '/userdetails/'), {
+      //   isNewUser: false
+      // });
+      update(ref(db, 'Customers/' + UserId + '/devices/'), {
+        laundryBasket: 'I'
+      });
+      this.laundryInit = 'I'
       this.statusText = "Laundry Basket initiated";
 
     });
@@ -144,7 +150,7 @@ export class LaundryBasketComponent implements OnInit {
 
 
   public onPercentageChangeColor(): any {
-    if (!this.isNewUser) {
+    // if (this.laundryInit === 'I') {
       switch (this.laundryStatus) {
         case 20:
           this.statusText = "Laundry Basket is just 20% keep going";
@@ -166,14 +172,15 @@ export class LaundryBasketComponent implements OnInit {
           return (this.a100);
 
         default:
-          if (!this.isNewUser) {
+          this.statusText = "Kindly initiate laundry basket";
+          if (this.laundryInit === 'I') {
             this.statusText = "Laundry Basket Initiated";
           }
           return (this.a0);
 
       }
 
-    }
+    // }
   }
 
 }

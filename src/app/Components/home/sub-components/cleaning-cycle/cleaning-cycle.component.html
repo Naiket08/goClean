@@ -1,10 +1,44 @@
 <h2 mat-dialog-title>{{title}}</h2>
 
 <mat-dialog-content [formGroup]="form">
-    <mat-form-field>
-        <label class="label-style">{{label}}</label>
-        <input matInput class="input-field" placeholder="" formControlName="description" autocomplete="off">
-    </mat-form-field>
+    <div *ngIf="source === 'LB'">
+        <mat-form-field>
+            <label class="label-style">{{label}}</label>
+            <input matInput class="input-field" placeholder="" formControlName="description" autocomplete="off">
+        </mat-form-field>
+    </div>
+    <div *ngIf="source === 'DB'">
+        <mat-form-field>
+            <label class="label-style">Kindly tell us about your last cleaned room</label>
+            <input matInput class="input-field" placeholder="" formControlName="description" autocomplete="off">
+            <mat-select (selectionChange)="updateRoom($event.value)">
+                <mat-option *ngFor="let room of rooms" [value]="room.value" >
+                    {{room.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="example-section">
+            <label class="label-style">Select all the applicable days you will be able to dedicate for cleaning, and we
+                will create a cycle for you </label>
+            <div class="example-list-section">
+                <mat-checkbox class="example-margin" [checked]="allComplete" [color]="task.color"
+                    [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+                    {{task.name}}
+                </mat-checkbox>
+            </div>
+            <span class="example-list-section">
+                <ul>
+                    <li *ngFor="let subtask of task.subtasks">
+                        <mat-checkbox [(ngModel)]="subtask.completed" [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete()" [ngModelOptions]="{standalone: true}">
+                            {{subtask.name}}
+                        </mat-checkbox>
+                    </li>
+                </ul>
+            </span>
+        </div>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>

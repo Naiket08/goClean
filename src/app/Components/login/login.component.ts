@@ -98,13 +98,11 @@ export class LoginComponent implements OnInit {
         laundryBasketStatus: 0,
         DustbinStatus: false,
         ventStatus: false,
-        washingMachineStatus: false
-      },
-      room:{
-        room1: false,
-        room2: false,
-        room3: false,
-        room4: false
+        washingMachineStatus: false,
+        laundryBasket: 'NI',
+        Dustbin: 'NI',
+        vent: 'NI',
+        washingMachine: 'NI'
       }
 
     });
@@ -186,15 +184,12 @@ export class LoginComponent implements OnInit {
         laundryBasketStatus: 0,
         DustbinStatus: false,
         ventStatus: false,
-        washingMachineStatus: false
-      },      
-      room:{
-        room1: false,
-        room2: false,
-        room3: false,
-        room4: false
+        washingMachineStatus: false,
+        laundryBasket: 'NI',
+        Dustbin: 'NI',
+        vent: 'NI',
+        washingMachine: 'NI'
       }
-
     }); 
 
 

@@ -21,7 +21,7 @@ export class RecycleBinComponent implements OnInit {
   ngOnChanges(change: SimpleChanges){
     if(change.userInfo && this.userInfo){
       this.empty= this.userInfo.users!.devices.DustbinStatus;
-      this.isNewUser= this.userInfo.users!.userdetails.
+      this.isNewUser= this.userInfo.users!.userdetails.isNewUser;
       console.log(this.empty);
     }
   }

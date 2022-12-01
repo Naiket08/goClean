@@ -17,11 +17,15 @@ users: {
         laundryBasketStatus: 0,
         DustbinStatus: false,
         ventStatus: false,
-        washingMachineStatus: false
+        washingMachineStatus: false,
+        laundryBasket: 'NI',
+        Dustbin: 'NI',
+        vent: 'NI',
+        washingMachine: 'NI'
     },
-    room:{
+    room: {
         room1: false,
-        room2: false,
+        room2: true,
         room3: false,
         room4: false
     }

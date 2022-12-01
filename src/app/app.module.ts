@@ -25,6 +25,7 @@ import { DashboardComponent } from './Components/home/dashboard/dashboard.compon
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { AuthguardServiceService } from './authguard-service.service';
@@ -69,6 +70,7 @@ import { AirventComponent } from './Components/home/sub-components/airvent/airve
     MatSelectModule,
     MatButtonModule,
     MatToolbarModule,
+    MatCheckboxModule,
     NgbCollapseModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

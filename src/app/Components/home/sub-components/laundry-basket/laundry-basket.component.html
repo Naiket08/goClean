@@ -13,9 +13,9 @@
           Laundry Basket Status</h4>
         <p class="card-text" [ngStyle]="{'color': colorOfDevice }">{{statusText}}</p>
         <div class="d-flex justify-content-center" id="step2">
-          <button type="button" class="btn btn-info" *ngIf="!isNewUser"
+          <button type="button" class="btn btn-info" *ngIf="laundryInit==='I'"
             (click)="onClickChangeToDetergent()">Info</button>
-          <button type="button" class="btn btn-info" *ngIf="isNewUser" (click)="callIntroJs()">Intiate</button>
+          <button type="button" class="btn btn-info" *ngIf="laundryInit === 'NI'" (click)="callIntroJs()">Intiate</button>
         </div>
       </div>
     </div>

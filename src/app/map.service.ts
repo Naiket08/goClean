@@ -75,9 +75,9 @@ const roomsData: FeatureCollection = {
     {
       type: 'Feature',
       properties: {
-        name: 'Room 1',
+        name: 'Living Room',
         square: 576,
-        color: '#FFFFFF'
+        color: '#87D37C'
       },
       geometry: {
         type: 'Polygon',
@@ -91,7 +91,7 @@ const roomsData: FeatureCollection = {
     }, {
       type: 'Feature',
       properties: {
-        name: 'Room 2',
+        name: 'Kitchen',
         square: 600,
         color: '#FFFFFF'
       },
@@ -107,7 +107,7 @@ const roomsData: FeatureCollection = {
     }, {
       type: 'Feature',
       properties: {
-        name: 'Room 3',
+        name: 'Bedroom',
         square: 540,
         color: '#FFFFFF'
       },
@@ -123,7 +123,7 @@ const roomsData: FeatureCollection = {
     }, {
       type: 'Feature',
       properties: {
-        name: 'Room 4',
+        name: 'Bathroom',
         square: 288,
         color: '#FFFFFF'
       },

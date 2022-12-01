@@ -29,7 +29,6 @@ export class UserinfoService {
   }
 
   getUserInfo() {
-    debugger;
     const userId = this.currentUserUniqueId ? this.currentUserUniqueId : localStorage.getItem('UserID');
     const users = this.httpClient.get("https://goclean-995b3-default-rtdb.firebaseio.com/Customers/" + userId + ".json");
     users.subscribe((data: any) => {

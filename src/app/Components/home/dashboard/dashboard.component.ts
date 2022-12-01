@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
       const room = element.attribute('name');
       if(!this.demo.includes(room)){
         element.applySettings({
-          color: '#8b0010'
+          color: '#CC5C5E'
         });
       }
     });

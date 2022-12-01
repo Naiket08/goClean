@@ -75,25 +75,27 @@ export class CleaningCycleComponent implements OnInit {
     console.log(this.form!.value);
     const db = getDatabase();
     const UserId = localStorage.getItem('UserID');
-    if (this.roomSelect === 'kitchen') {
-      update(ref(db, 'Customers/' + UserId + '/room/'), {
-        room1: true
-      });
-    }
-    else if (this.roomSelect === 'living') {
-      update(ref(db, 'Customers/' + UserId + '/room/'), {
-        room2: true
-      });
-    }
-    else if (this.roomSelect === 'bed') {
-      update(ref(db, 'Customers/' + UserId + '/room/'), {
-        room3: true
-      });
-    }
-    else if (this.roomSelect === 'bath') {
-      update(ref(db, 'Customers/' + UserId + '/room/'), {
-        room4: true
-      });
+    if (this.source === "DB") {
+      if (this.roomSelect === 'kitchen') {
+        update(ref(db, 'Customers/' + UserId + '/room/'), {
+          room1: true
+        });
+      }
+      else if (this.roomSelect === 'living') {
+        update(ref(db, 'Customers/' + UserId + '/room/'), {
+          room2: true
+        });
+      }
+      else if (this.roomSelect === 'bed') {
+        update(ref(db, 'Customers/' + UserId + '/room/'), {
+          room3: true
+        });
+      }
+      else if (this.roomSelect === 'bath') {
+        update(ref(db, 'Customers/' + UserId + '/room/'), {
+          room4: true
+        });
+      }
     }
     return this.dialogRef.close(this.form!.value);
   }

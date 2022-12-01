@@ -39,11 +39,25 @@
             </span>
         </div>
     </div>
+    <div class="tc-mar" *ngIf="source === 'TC'">
+        <label class="label-style">{{label}}</label>
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button class="radio-but" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button value="No">No</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="tc-mar" *ngIf="source === 'WM'">
+        <label class="label-style">{{label}}</label>
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button class="radio-but" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button value="No">No</mat-radio-button>
+        </mat-radio-group>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <div class="d-flex justify-content-between w-100">
-        <button class="mat-raised-button" (click)="close()">Close</button>
+    <div class="d-flex justify-content-between w-100 ">
+        <button class="mat-raised-button mr-2" (click)="close()">Close</button>
         <button class="mat-raised-button save" (click)="save()">Save</button>
     </div>
 </mat-dialog-actions>

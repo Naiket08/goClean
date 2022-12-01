@@ -14,10 +14,18 @@
         <div class="card-body">
             <h4 class="card-title d-flex justify-content-center" [ngStyle]="{'color': colorOfDevice }">Washing machine
                 status</h4>
-            <p class="card-text d-flex justify-content-center" *ngIf = "power" [ngStyle]="{'color': colorOfDevice }">{{statusTextON}}</p>
-            <p class="card-text d-flex justify-content-center" *ngIf = "!power" [ngStyle]="{'color': colorOfDevice }">{{statusTextOFF}}</p>
-            <div class="d-flex justify-content-center">
+            <p class="card-text d-flex justify-content-center" *ngIf = "power  && washingInit === 'I'" [ngStyle]="{'color': colorOfDevice }">{{statusTextON}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = "!power && washingInit === 'I'" [ngStyle]="{'color': colorOfDevice }">{{statusTextOFF}}</p>
+            <p class="card-text d-flex justify-content-center" *ngIf = " washingInit === 'NI'" [ngStyle]="{'color': colorOfDevice }">{{statusText}}</p>
+
+            <!-- <div class="d-flex justify-content-center">
                 <button type="button" class="btn btn-info" (click)="onClickChangeToDetergent()">Detergent</button>
+            </div> -->
+            <div class="d-flex justify-content-center" id="step2">
+                <!-- <button type="button" class="btn btn-info" *ngIf="laundryInit==='I'"
+                  (click)="onClickChangeToDetergent()">Info</button> -->
+                <button type="button" class="btn btn-info" *ngIf="washingInit === 'NI'"
+                    (click)="callIntroJs()">Intiate</button>
             </div>
         </div>
         <div class="card container-size" style="width:400px" *ngIf="flipStatus"

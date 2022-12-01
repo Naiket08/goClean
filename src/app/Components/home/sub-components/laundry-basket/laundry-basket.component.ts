@@ -34,6 +34,7 @@ export class LaundryBasketComponent implements OnInit {
   }
 
   ngOnChanges(change: SimpleChanges) {
+    debugger;
     if (change.userInfo && this.userInfo) {
       this.laundryStatus = this.userInfo.users!.devices.laundryBasketStatus;
       this.isNewUser = this.userInfo.users!.userdetails.isNewUser;
@@ -160,8 +161,6 @@ export class LaundryBasketComponent implements OnInit {
           this.statusText = "Laundry Basket is just 0% keep going";
           return (this.a0);
 
-
-
         case (this.laundryPercentage<=20):
           this.statusText = "Laundry Basket is just 20% keep going";
           return (this.a20);
@@ -190,7 +189,7 @@ export class LaundryBasketComponent implements OnInit {
 
       }
 
-    // }
-  }
+    }
+  // }
 
 }

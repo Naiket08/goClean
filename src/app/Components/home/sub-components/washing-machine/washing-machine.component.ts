@@ -1,5 +1,8 @@
 import { Component, Input, OnInit, HostListener, SimpleChanges } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { getDatabase, ref, update } from 'firebase/database';
 import { userDetails } from 'src/app/models/userInfo.model';
+import { CleaningCycleComponent } from '../cleaning-cycle/cleaning-cycle.component';
 
 @Component({
   selector: 'app-washing-machine',
@@ -12,9 +15,11 @@ export class WashingMachineComponent implements OnInit {
 
   colorOfDevice = 'white';
 
-  power:boolean | undefined;
+  power: boolean | undefined;
+  washingInit: string | undefined;
+  statusText: string ="Kindly Initiate washing machine";
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   flipStatus = false; //this flag used to flip the laundry card to detergent 
   
@@ -29,7 +34,7 @@ export class WashingMachineComponent implements OnInit {
   ngOnChanges(change: SimpleChanges){
     if(change.userInfo && this.userInfo){
       this.power= this.userInfo.users!.devices.washingMachineStatus;
-      console.log(this.power);
+      this.washingInit = this.userInfo.users!.devices.washingMachine;
     }
   }
 
@@ -63,6 +68,36 @@ export class WashingMachineComponent implements OnInit {
     else{
       this.colorOfDevice = 'black';
     }
+  }
+
+  public callIntroJs() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      title: 'Washing Machine',
+      source: 'WM',
+      label: 'Would you like to initiate the washing machine can to proceed?'
+    };
+
+    const data = this.dialog.open(CleaningCycleComponent, dialogConfig);
+    data.beforeClosed().subscribe((result: any) => {
+      localStorage.setItem('newUser', 'false');
+      const db = getDatabase();
+      const UserId = localStorage.getItem('UserID');
+      console.log(result.description);
+      // update(ref(db, 'Customers/' + UserId + '/userdetails/'), {
+      //   isNewUser: false
+      // });
+      update(ref(db, 'Customers/' + UserId + '/devices/'), {
+        washingMachine: 'I'
+      });
+      this.washingInit = 'I'
+      this.statusText = "washing machine can initiated";
+
+    });
   }
 
 }

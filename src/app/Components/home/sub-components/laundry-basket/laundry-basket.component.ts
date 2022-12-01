@@ -18,7 +18,7 @@ export class LaundryBasketComponent implements OnInit {
   @Input() public userInfo: any; // decorate the property with @Input()
   @Input() public newUser: boolean | undefined | null; // decorate the property with @Input()
   isNewUser: boolean = true;
-  public laundryStatus: number | undefined;
+  public laundryStatus: number = 0;
   laundryInit: string | undefined;
 
   constructor(public introJs: IntrojsService, private store: Store<GlobalStateInterface>, private dialog: MatDialog) {
@@ -113,6 +113,7 @@ export class LaundryBasketComponent implements OnInit {
 
 
 
+  
 
 
   public a20 = {
@@ -147,27 +148,36 @@ export class LaundryBasketComponent implements OnInit {
 
   public statusText = "Laundry Basket is empty";
 
+  laundryPercentage = 0;
 
 
   public onPercentageChangeColor(): any {
     // if (this.laundryInit === 'I') {
-      switch (this.laundryStatus) {
-        case 20:
+      this.laundryPercentage = (this.laundryStatus/25)*100;
+      debugger;
+      switch (true) {
+        case (this.laundryPercentage===0):
+          this.statusText = "Laundry Basket is just 0% keep going";
+          return (this.a0);
+
+
+
+        case (this.laundryPercentage<=20):
           this.statusText = "Laundry Basket is just 20% keep going";
           return (this.a20);
 
-        case 40:
+        case (this.laundryPercentage<=40):
           this.statusText = "Laundry Basket is just 40% keep going";
           return (this.a40);
-        case 60:
+        case (this.laundryPercentage<=60):
           this.statusText = "Laundry Basket is just 60% keep going";
           return (this.a60);
 
-        case 80:
+        case (this.laundryPercentage<=80):
           this.statusText = "Laundry Basket is almost full. Please do laundry";
           return (this.a80);
 
-        case 100:
+        case (this.laundryPercentage<=100):
           this.statusText = "Laundry Basket is full. You are good to go complete your laundry";
           return (this.a100);
 

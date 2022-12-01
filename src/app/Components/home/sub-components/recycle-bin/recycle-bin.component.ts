@@ -10,7 +10,7 @@ import { userDetails } from 'src/app/models/userInfo.model';
 export class RecycleBinComponent implements OnInit {
   @Input() public userInfo: any; // decorate the property with @Input()
 
-
+  isNewUser: boolean = true;
   empty:boolean | undefined;
 
   colorOfDevice = "black";
@@ -21,6 +21,7 @@ export class RecycleBinComponent implements OnInit {
   ngOnChanges(change: SimpleChanges){
     if(change.userInfo && this.userInfo){
       this.empty= this.userInfo.users!.devices.DustbinStatus;
+      this.isNewUser= this.userInfo.users!.userdetails.
       console.log(this.empty);
     }
   }
